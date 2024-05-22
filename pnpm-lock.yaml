@@ -14,7 +14,7 @@ importers:
 
   config/eslint-config:
     devDependencies:
-      '@pathos/prettier':
+      '@witz/prettier':
         specifier: workspace:*
         version: link:../prettier
       '@rocketseat/eslint-config':

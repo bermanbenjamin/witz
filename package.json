@@ -1,5 +1,5 @@
 {
-  "name": "pathos",
+  "name": "witz",
   "private": true,
   "scripts": {
     "build": "turbo build",
