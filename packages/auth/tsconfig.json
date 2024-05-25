@@ -1,0 +1,6 @@
+{
+  "extends": "@witz/tsconfig/library.json",
+  "include": [
+    "src/**/*",
+  ]
+}
