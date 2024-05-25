@@ -19,8 +19,8 @@ app.setValidatorCompiler(validatorCompiler)
 app.register(fastifySwagger, {
   openapi: {
     info: {
-      title: 'Next.js SaaS',
-      description: 'Full-stack SaaS with multi-tenant & RBAC.',
+      title: 'Witz',
+      description: 'Platform to control your investments.',
       version: '1.0.0',
     },
     servers: [],
