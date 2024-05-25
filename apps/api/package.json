@@ -1,0 +1,23 @@
+{
+  "name": "@witz/api",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@witz/auth": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@witz/eslint-config": "workspace:*",
+    "@witz/prettier": "workspace:*",
+    "@witz/tsconfig": "workspace:*",
+    "tsx": "^4.11.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@witz/eslint-config/node"
+    ]
+  },
+  "prettier": "@witz/prettier"
+}
