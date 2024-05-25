@@ -10,6 +10,8 @@ import { User } from './models/user'
 import { permissions } from './permissions'
 import { userSubject } from './subjects/user'
 
+export * from './models/user'
+
 const appAbilitiesSchema = z.union([
   userSubject,
 

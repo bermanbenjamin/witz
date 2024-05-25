@@ -4,7 +4,7 @@ import { roleSchema } from '../roles'
 
 export const userSchema = z.object({
   __typename: z.literal('User').default('User').optional(),
-  id: z.string().optional(),
+  id: z.string(),
   role: roleSchema,
 })
 

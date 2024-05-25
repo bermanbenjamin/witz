@@ -9,6 +9,7 @@ type PermissionsByRole = (
   builder: AbilityBuilder<AppAbility>,
 ) => void
 
+// ToDo: Define permissions for each role
 export const permissions: Record<Role, PermissionsByRole> = {
   ADMIN: (_, { can }) => {
     can('manage', 'all')
