@@ -20,21 +20,21 @@ model User {
 }
 
 model Question {
-  id                  Int                   @id @default(autoincrement())
-  question            String
-  alternatives        String[]
-  weights             Int[]
-  answers             Answer[]
-  QuestionAlternative QuestionAlternative[]
+  id                   Int                   @id @default(autoincrement())
+  question             String
+  alternatives         String[]
+  weights              Int[]
+  answers              Answer[]
+  questionAlternatives QuestionAlternative[]
 }
 
 model QuestionAlternative {
-  id          Int      @id @default(autoincrement())
-  question    Question @relation(fields: [questionId], references: [id])
-  questionId  Int      @map("question_id")
+  id          Int       @id @default(autoincrement())
   alternative String
   weight      Int
   Answer      Answer[]
+  Question    Question? @relation(fields: [questionId], references: [id])
+  questionId  Int?
 }
 
 model Answer {
