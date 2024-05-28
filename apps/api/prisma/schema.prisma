@@ -48,14 +48,10 @@ model Answer {
 }
 
 model Suitability {
-  id          String   @id @default(uuid())
-  clientName  String   @map("client_name")
-  clientEmail String   @map("client_email")
-  answers     Answer[]
-  createdAt   DateTime @default(now()) @map("created_at")
-  score       Int
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String   @map("user_id")
-
-  @@index([clientEmail])
+  id        String   @id @default(uuid())
+  answers   Answer[]
+  createdAt DateTime @default(now()) @map("created_at")
+  score     Int
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
 }
