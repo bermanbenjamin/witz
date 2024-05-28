@@ -2,7 +2,13 @@
   "name": "@witz/api",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tsx watch src/http/server.ts"
+    "dev": "tsx watch src/http/server.ts",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:migrate:reset": "prisma migrate reset --force",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@fastify/cors": "^9.0.1",

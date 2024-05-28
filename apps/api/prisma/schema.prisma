@@ -8,13 +8,54 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  name         String?
-  email        String   @unique
-  passwordHash String?  @map("password_hash")
-  avatarUrl    String?  @map("avatar_url")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id            String        @id @default(uuid())
+  name          String?
+  email         String        @unique
+  passwordHash  String?       @map("password_hash")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+  suitabilities Suitability[]
 
   @@map("users")
+}
+
+model Question {
+  id                  Int                   @id @default(autoincrement())
+  question            String
+  alternatives        String[]
+  weights             Int[]
+  answers             Answer[]
+  QuestionAlternative QuestionAlternative[]
+}
+
+model QuestionAlternative {
+  id          Int      @id @default(autoincrement())
+  question    Question @relation(fields: [questionId], references: [id])
+  questionId  Int      @map("question_id")
+  alternative String
+  weight      Int
+  Answer      Answer[]
+}
+
+model Answer {
+  id                   Int                 @id @default(autoincrement())
+  suitability          Suitability         @relation(fields: [suitabilityId], references: [id])
+  suitabilityId        String              @map("suitability_id")
+  question             Question            @relation(fields: [questionId], references: [id])
+  questionId           Int                 @map("question_id")
+  choosedAlternative   QuestionAlternative @relation(fields: [choosedAlternativeId], references: [id])
+  choosedAlternativeId Int                 @map("choosed_alternative_id")
+}
+
+model Suitability {
+  id          String   @id @default(uuid())
+  clientName  String   @map("client_name")
+  clientEmail String   @map("client_email")
+  answers     Answer[]
+  createdAt   DateTime @default(now()) @map("created_at")
+  score       Int
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @map("user_id")
+
+  @@index([clientEmail])
 }
