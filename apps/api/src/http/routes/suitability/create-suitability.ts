@@ -7,19 +7,21 @@ import { CalculateSuitabilityScore } from '@/service/calculate-score'
 
 export async function createSuitability(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
-    '/suitability',
+    '/suitabilities',
     {
       schema: {
         tags: ['Auth'],
         summary: 'Create a suitability answer',
         body: z.object({
-          userId: z.string(),
+          userId: z.string().min(1),
           questions: z
             .object({
               questionId: z.number(),
               choosedAlternativeId: z.number(),
             })
-            .array(),
+            .array()
+            .min(12)
+            .max(12),
         }),
       },
     },
@@ -41,10 +43,12 @@ export async function createSuitability(app: FastifyInstance) {
           data: {
             userId,
             answers: {
-              create: questions.map((question) => ({
-                questionId: question.questionId,
-                choosedAlternativeId: question.choosedAlternativeId,
-              })),
+              createMany: {
+                data: questions.map((question) => ({
+                  questionId: question.questionId,
+                  choosedAlternativeId: question.choosedAlternativeId,
+                })),
+              },
             },
             score,
           },
@@ -55,7 +59,7 @@ export async function createSuitability(app: FastifyInstance) {
         if (error instanceof ZodError) {
           return reply.status(400).send({ message: error.errors })
         }
-        reply.status(500).send({ message: 'Internal Server Error' })
+        reply.status(500).send({ message: 'Internal Server Error', error })
       }
     }
   )

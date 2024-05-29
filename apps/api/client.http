@@ -6,3 +6,62 @@ content-type: application/json
     "email": "test@test.com",
     "password": "password"
 }
+
+################################
+
+POST http://localhost:3333/suitabilities
+content-type: application/json
+
+{
+  "userId": "2ff31a05-7066-4f95-b99f-2d5fbf003f65",
+  "questions": [
+    {
+      "questionId": 1,
+      "choosedAlternativeId": 1
+    }, 
+    {
+      "questionId": 2,
+      "choosedAlternativeId": 3
+    }, 
+    {
+      "questionId": 3,
+      "choosedAlternativeId": 5
+    }, 
+    {
+      "questionId": 4,
+      "choosedAlternativeId": 4
+    }, 
+    {
+      "questionId": 5,
+      "choosedAlternativeId": 2
+    }, 
+    {
+      "questionId": 6,
+      "choosedAlternativeId": 2
+    }, 
+    {
+      "questionId": 7,
+      "choosedAlternativeId": 4
+    }, 
+    {
+      "questionId": 8,
+      "choosedAlternativeId": 3
+    }, 
+    {
+      "questionId": 9,
+      "choosedAlternativeId": 3
+    }, 
+    {
+      "questionId": 10,
+      "choosedAlternativeId": 4
+    }, 
+    {
+      "questionId": 11,
+      "choosedAlternativeId": 6
+    }, 
+    {
+      "questionId": 12,
+      "choosedAlternativeId": 1
+    }
+  ]
+}

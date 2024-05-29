@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { questions } from '@/constants/question'
 
 type Answer = {
   questionId: number
@@ -8,19 +8,25 @@ type Answer = {
 export async function CalculateSuitabilityScore(
   answers: Answer[]
 ): Promise<number> {
-  const questions = await prisma.question.findMany({
-    include: {
-      questionAlternatives: true,
-    },
-  })
-
   const totalWeight = answers.reduce((acc, answer) => {
     const question = questions.find(
-      (question) => question.id === answer.questionId
+      (question) => question.questionNumber === answer.questionId
     )
-    const alternative = question?.questionAlternatives.find(
-      (alt) => alt.id === answer.choosedAlternativeId
+
+    if (question === undefined) {
+      throw new Error(`Question ${answer.questionId} does not exist`)
+    }
+
+    const alternative = question.alternatives.find(
+      (alternative) =>
+        alternative.alternativeNumber === answer.choosedAlternativeId
     )
+
+    if (!alternative) {
+      throw new Error(
+        `Alternative ${answer.choosedAlternativeId} does not exist`
+      )
+    }
 
     if (question && alternative) {
       acc += alternative.weight

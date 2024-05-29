@@ -19,32 +19,12 @@ model User {
   @@map("users")
 }
 
-model Question {
-  id                   Int                   @id @default(autoincrement())
-  question             String
-  alternatives         String[]
-  weights              Int[]
-  answers              Answer[]
-  questionAlternatives QuestionAlternative[]
-}
-
-model QuestionAlternative {
-  id          Int       @id @default(autoincrement())
-  alternative String
-  weight      Int
-  Answer      Answer[]
-  Question    Question? @relation(fields: [questionId], references: [id])
-  questionId  Int?
-}
-
 model Answer {
-  id                   Int                 @id @default(autoincrement())
-  suitability          Suitability         @relation(fields: [suitabilityId], references: [id])
-  suitabilityId        String              @map("suitability_id")
-  question             Question            @relation(fields: [questionId], references: [id])
-  questionId           Int                 @map("question_id")
-  choosedAlternative   QuestionAlternative @relation(fields: [choosedAlternativeId], references: [id])
-  choosedAlternativeId Int                 @map("choosed_alternative_id")
+  id                   Int         @id @default(autoincrement())
+  suitability          Suitability @relation(fields: [suitabilityId], references: [id])
+  suitabilityId        String      @map("suitability_id")
+  questionId           Int         @map("question_id")
+  choosedAlternativeId Int         @map("choosed_alternative_id")
 }
 
 model Suitability {
