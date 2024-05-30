@@ -23,6 +23,12 @@ export async function createSuitability(app: FastifyInstance) {
             .min(12)
             .max(12),
         }),
+        response: z.object({
+          id: z.string(),
+          createdAt: z.date(),
+          score: z.number(),
+          userId: z.string(),
+        }),
         description: 'Create a new suitability',
         required: ['userId', 'questions']
       },

@@ -1,6 +1,7 @@
 import { log } from 'console'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
+import { z } from 'zod'
 
 import { prisma } from '@/lib/prisma'
 
@@ -10,6 +11,17 @@ export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
     {
      schema: {
       tags: ['User'],
+      response: z.object({
+        id: z.string(),
+        createdAt: z.date(),
+        score: z.number(),
+        userId: z.string(),
+        answers: z.object({
+          id: z.string(),
+          questionId: z.string(),
+          choosedAlternatives: z.number().array(),
+        }).array(),
+      }),
      }
     },
     async (request, reply) => {
