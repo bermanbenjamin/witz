@@ -1,8 +1,8 @@
-import { questions } from '@/constants/question'
+import { QuestionType, questions } from '@/constants/question'
 
 type Answer = {
   questionId: number
-  choosedAlternativeId: number
+  choosedAlternativesId: number[]
 }
 
 export async function CalculateSuitabilityScore(
@@ -13,27 +13,40 @@ export async function CalculateSuitabilityScore(
       (question) => question.questionNumber === answer.questionId
     )
 
-    if (question === undefined) {
+    if (!question) {
       throw new Error(`Question ${answer.questionId} does not exist`)
     }
 
+    const alternativeWeights = calculateChoosedAlternativeWeights(
+      answer,
+      question
+    )
+
+    const questionWeight = alternativeWeights.reduce(
+      (acc, weight) => acc + weight,
+      0
+    )
+    return acc + questionWeight
+  }, 0)
+
+  return totalWeight
+}
+
+function calculateChoosedAlternativeWeights(
+  answer: Answer,
+  question: QuestionType
+) {
+  return answer.choosedAlternativesId.map((choosedAlternative) => {
     const alternative = question.alternatives.find(
-      (alternative) =>
-        alternative.alternativeNumber === answer.choosedAlternativeId
+      (alt) => alt.alternativeNumber === choosedAlternative
     )
 
     if (!alternative) {
       throw new Error(
-        `Alternative ${answer.choosedAlternativeId} does not exist`
+        `Alternative ${choosedAlternative} for question ${answer.questionId} does not exist`
       )
     }
 
-    if (question && alternative) {
-      acc += alternative.weight
-    }
-
-    return acc
-  }, 0)
-
-  return totalWeight
+    return alternative.weight
+  })
 }

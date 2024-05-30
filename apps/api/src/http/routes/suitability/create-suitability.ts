@@ -17,7 +17,7 @@ export async function createSuitability(app: FastifyInstance) {
           questions: z
             .object({
               questionId: z.number(),
-              choosedAlternativeId: z.number(),
+              choosedAlternativesId: z.number().array(),
             })
             .array()
             .min(12)
@@ -46,7 +46,7 @@ export async function createSuitability(app: FastifyInstance) {
               createMany: {
                 data: questions.map((question) => ({
                   questionId: question.questionId,
-                  choosedAlternativeId: question.choosedAlternativeId,
+                  choosedAlternativesId: question.choosedAlternativesId,
                 })),
               },
             },

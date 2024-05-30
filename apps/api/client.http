@@ -17,51 +17,51 @@ content-type: application/json
   "questions": [
     {
       "questionId": 1,
-      "choosedAlternativeId": 1
+      "choosedAlternativesId": [4]
     }, 
     {
       "questionId": 2,
-      "choosedAlternativeId": 3
+      "choosedAlternativesId": [3]
     }, 
     {
       "questionId": 3,
-      "choosedAlternativeId": 5
+      "choosedAlternativesId": [5]
     }, 
     {
       "questionId": 4,
-      "choosedAlternativeId": 4
+      "choosedAlternativesId": [4]
     }, 
     {
       "questionId": 5,
-      "choosedAlternativeId": 2
+      "choosedAlternativesId": [2]
     }, 
     {
       "questionId": 6,
-      "choosedAlternativeId": 2
+      "choosedAlternativesId": [2]
     }, 
     {
       "questionId": 7,
-      "choosedAlternativeId": 4
+      "choosedAlternativesId": [4]
     }, 
     {
       "questionId": 8,
-      "choosedAlternativeId": 3
+      "choosedAlternativesId": [3]
     }, 
     {
       "questionId": 9,
-      "choosedAlternativeId": 3
+      "choosedAlternativesId": [3]
     }, 
     {
       "questionId": 10,
-      "choosedAlternativeId": 4
+      "choosedAlternativesId": [4]
     }, 
     {
       "questionId": 11,
-      "choosedAlternativeId": 6
+      "choosedAlternativesId": [6]
     }, 
     {
       "questionId": 12,
-      "choosedAlternativeId": 1
+      "choosedAlternativesId": [1]
     }
   ]
 }

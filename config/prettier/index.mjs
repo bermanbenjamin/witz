@@ -15,6 +15,7 @@ const config = {
   arrowParens: "always",
   endOfLine: "auto",
   bracketSameLine: false,
+  rangeEnd: 120
 };
 
 export default config;
