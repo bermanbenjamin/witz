@@ -11,34 +11,37 @@ import {
 
 import { createAccount } from './routes/auth/create-account'
 import { createSuitability } from './routes/suitability/create-suitability'
+import { getAllSuitabilitiesByUserId } from './routes/user/get-all-user-suitabilities'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
 
-app.register(fastifySwagger, {
-  prefix: 'api',
-  openapi: {
-    info: {
-      title: 'Witz',
-      description: 'Platform to control your investments.',
-      version: '1.0.0',
+  app.register(fastifySwagger, {
+    openapi: {
+      info: {
+        title: 'Witz',
+        description: 'Platform to control your investments.',
+        version: '1.0.0',
+      },
+      servers: [],
     },
-    servers: [],
-  },
-  transform: jsonSchemaTransform,
-})
-
-app.register(fastifySwaggerUI, {
-  routePrefix: '/docs',
-})
-
-app.register(fastifyCors)
-
-app.register(createAccount)
-app.register(createSuitability)
+    transform: jsonSchemaTransform,
+  })
+  
+  app.register(fastifySwaggerUI, {
+    routePrefix: '/docs',
+  })
+  
+  app.register(fastifyCors)
+  
+  app.register(createAccount)
+  app.register(createSuitability)
+  app.register(getAllSuitabilitiesByUserId)
+  
 
 app.listen({ port: 3333 }).then(() => {
   console.log('Server is running on port 3333')
+  console.log(app.printRoutes());
 })
