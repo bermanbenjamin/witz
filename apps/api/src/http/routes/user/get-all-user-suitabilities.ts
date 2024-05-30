@@ -11,6 +11,9 @@ export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
     {
      schema: {
       tags: ['User'],
+      params: z.object({
+        userId: z.string().uuid(),
+      }),
       response: z.object({
         id: z.string(),
         createdAt: z.date(),
@@ -26,7 +29,7 @@ export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
     },
     async (request, reply) => {
       try {
-        const { userId } = request.params as { userId: string }
+        const { userId } = request.params
 
         const userExists = await prisma.user.findFirst({
           where: { id: userId },
