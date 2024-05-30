@@ -9,12 +9,13 @@ type PermissionsByRole = (
   builder: AbilityBuilder<AppAbility>,
 ) => void
 
-// ToDo: Define permissions for each role
 export const permissions: Record<Role, PermissionsByRole> = {
   ADMIN: (_, { can }) => {
-    can('manage', 'all')
+    can('manage', 'all') // Admin can perform any action on any resource
   },
-  MEMBER: (_, { can }) => {
-    can('get', 'User')
+  MEMBER: (user, { can }) => {
+    can('get', 'User', { id: user.id }) // Member can read their own User information
+    can('get', 'Suitability', { userId: user.id }) // Member can read their own Suitability information
+    can('manage', 'Suitability', { userId: user.id }) // Member can manage their own Suitability information
   },
 }
