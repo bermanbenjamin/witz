@@ -18,6 +18,7 @@ app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
 
 app.register(fastifySwagger, {
+  prefix: 'api',
   openapi: {
     info: {
       title: 'Witz',
