@@ -10,7 +10,7 @@ export async function createSuitability(app: FastifyInstance) {
     '/suitabilities',
     {
       schema: {
-        tags: ['Auth'],
+        tags: ['Suitability'],
         summary: 'Create a suitability answer',
         body: z.object({
           userId: z.string().min(1),
@@ -23,6 +23,8 @@ export async function createSuitability(app: FastifyInstance) {
             .min(12)
             .max(12),
         }),
+        description: 'Create a new suitability',
+        required: ['userId', 'questions']
       },
     },
     async (request, reply) => {
