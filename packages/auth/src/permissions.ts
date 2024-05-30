@@ -18,4 +18,8 @@ export const permissions: Record<Role, PermissionsByRole> = {
     can('get', 'Suitability', { userId: user.id }) // Member can read their own Suitability information
     can('manage', 'Suitability', { userId: user.id }) // Member can manage their own Suitability information
   },
+  GUEST: (user, { can }) => {
+    can('get', 'Suitability', { userId: user.id }) // Member can read their own Suitability information
+    can('manage', 'Suitability', { userId: user.id }) // Member can manage their own Suitability information
+  }
 }
