@@ -21,7 +21,7 @@ model User {
 
 model Answer {
   id                    Int         @id @default(autoincrement())
-  suitability           Suitability @relation(fields: [suitabilityId], references: [id])
+  suitability           Suitability @relation(fields: [suitabilityId], references: [id], onDelete: Cascade)
   suitabilityId         String      @map("suitability_id")
   questionId            Int         @map("question_id")
   choosedAlternativesId Int[]       @map("choosed_alternatives_id")

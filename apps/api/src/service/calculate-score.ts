@@ -1,4 +1,4 @@
-import { QuestionType, questions } from '@/constants/question'
+import { questions, QuestionType } from '@/constants/question'
 
 type Answer = {
   questionId: number

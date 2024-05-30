@@ -2,33 +2,41 @@
   "name": "@witz/api",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tsx watch src/http/server.ts",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate:dev": "prisma migrate dev",
-    "prisma:migrate:deploy": "prisma migrate deploy",
-    "prisma:migrate:reset": "prisma migrate reset --force",
-    "prisma:studio": "prisma studio",
-    "prisma:seed": "node prisma/seed.js"
+    "dev": "pnpm env:load tsx watch src/http/server.ts",
+    "prisma:generate": "pnpm env:load prisma generate",
+    "prisma:migrate:dev": "pnpm env:load prisma migrate dev",
+    "prisma:migrate:deploy": "pnpm env:load prisma migrate deploy",
+    "prisma:migrate:reset": "pnpm env:load prisma migrate reset --force",
+    "prisma:studio": "pnpm env:load prisma studio",
+    "env:load": "dotenv -e ../../.env --"
   },
   "dependencies": {
     "@fastify/cors": "^9.0.1",
+    "@fastify/jwt": "^8.0.1",
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^3.0.0",
     "@prisma/client": "^5.14.0",
     "@witz/auth": "workspace:*",
+    "@witz/env": "workspace:*",
     "bcryptjs": "^2.4.3",
     "fastify": "^4.27.0",
+    "fastify-plugin": "^4.5.1",
     "fastify-type-provider-zod": "^1.2.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.12.12",
     "@witz/eslint-config": "workspace:*",
     "@witz/prettier": "workspace:*",
     "@witz/tsconfig": "workspace:*",
+    "dotenv-cli": "^7.4.2",
     "prisma": "^5.14.0",
     "tsx": "^4.11.0"
+  },
+  "prisma": {
+    "seed": "pnpm env:load tsx prisma/seed.ts"
   },
   "eslintConfig": {
     "extends": [

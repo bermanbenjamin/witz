@@ -2,10 +2,11 @@ import { log } from 'console'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 
+import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 
 export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().get(
+  app.withTypeProvider<ZodTypeProvider>().register(auth).get(
     '/users/:userId/suitabilities',
     {
      schema: {
@@ -14,7 +15,7 @@ export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
     },
     async (request, reply) => {
       try {
-        const { userId } = request.params as { userId: string }
+        const userId = await request.getCurrentUserId()
 
         const userExists = await prisma.user.findFirst({
           where: { id: userId },
