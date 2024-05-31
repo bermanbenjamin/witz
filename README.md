@@ -21,29 +21,17 @@ Roles & permissions.
 
 ### Roles
 
-- Owner (count as administrator)
-- Administrator
-- Member
-- Anonymous
+- ADMIN
+- MEMBER
+- GUEST
 
 ### Permissions table
 
-|                        | Administrator | Member | Billing | Anonymous |
-| ---------------------- | ------------- | ------ | ------- | --------- |
-| Update organization    | ✅            | ❌     | ❌      | ❌        |
-| Delete organization    | ✅            | ❌     | ❌      | ❌        |
-| Invite a member        | ✅            | ❌     | ❌      | ❌        |
-| Revoke an invite       | ✅            | ❌     | ❌      | ❌        |
-| List members           | ✅            | ✅     | ✅      | ❌        |
-| Transfer ownership     | ⚠️            | ❌     | ❌      | ❌        |
-| Update member role     | ✅            | ❌     | ❌      | ❌        |
-| Delete member          | ✅            | ⚠️     | ❌      | ❌        |
-| List projects          | ✅            | ✅     | ✅      | ❌        |
-| Create a new project   | ✅            | ✅     | ❌      | ❌        |
-| Update a project       | ✅            | ⚠️     | ❌      | ❌        |
-| Delete a project       | ✅            | ⚠️     | ❌      | ❌        |
-| Get billing details    | ✅            | ❌     | ✅      | ❌        |
-| Export billing details | ✅            | ❌     | ✅      | ❌        |
+|                 | ADMIN | MEMBER | GUEST |
+| --------------- | ----- | ------ | ----- |
+| Create Account  | ✅    | ✅     | ✅    |
+| Login mail/pass | ✅    | ✅     | ❌    |
+| Login mail/pass | ✅    | ✅     | ❌    |
 
 > ✅ = allowed
 > ❌ = not allowed
