@@ -8,7 +8,6 @@ export const userSchema = z.object({
 })
 
 export const suitabilitySchema = z.object({
-  userId: z.string(),
   id: z.string(),
   createdAt: z.date(),
   score: z.number(),

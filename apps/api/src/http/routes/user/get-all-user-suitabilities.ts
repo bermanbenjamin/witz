@@ -4,27 +4,36 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
 import { prisma } from '@/lib/prisma'
+import { errorSchema } from '@/schema/base-schema'
+
+export const responseSchema200 = z.array(z.object({
+  id: z.string(),
+  createdAt: z.date(),
+  score: z.number(),
+  userId: z.string().nullable(),
+  answers: z.array(z.object({
+    id: z.number(),
+    questionId: z.number(),
+    choosedAlternativesId: z.array(z.number()),
+  })),
+}));
+
 
 export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
     '/users/:userId/suitabilities',
     {
      schema: {
+      description: 'Get all suitabilities for a user id',
       tags: ['User'],
       params: z.object({
         userId: z.string().uuid(),
       }),
-      response: z.object({
-        id: z.string(),
-        createdAt: z.date(),
-        score: z.number(),
-        userId: z.string(),
-        answers: z.object({
-          id: z.string(),
-          questionId: z.string(),
-          choosedAlternatives: z.number().array(),
-        }).array(),
-      }),
+      response: {
+        200: responseSchema200,
+        404: errorSchema,
+        500: errorSchema,
+      },
      }
     },
     async (request, reply) => {
