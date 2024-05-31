@@ -14,12 +14,12 @@ export const permissions: Record<Role, PermissionsByRole> = {
     can('manage', 'all') // Admin can perform any action on any resource
   },
   MEMBER: (user, { can }) => {
-    can('get', 'User', { id: user.id }) // Member can read their own User information
-    can('get', 'Suitability', { userId: user.id }) // Member can read their own Suitability information
-    can('manage', 'Suitability', { userId: user.id }) // Member can manage their own Suitability information
+    can('get', 'User', { id: {$eq: user.id} }) // Member can read their own User information
+    can('get', 'Suitability', { userId: {$eq: user.id} }) // Member can read their own Suitability information
+    can('manage', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
   },
   GUEST: (user, { can }) => {
-    can('get', 'Suitability', { userId: user.id }) // Member can read their own Suitability information
-    can('manage', 'Suitability', { userId: user.id }) // Member can manage their own Suitability information
+    can('get', 'Suitability', { userId: {$eq: user.id} }) // Member can read their own Suitability information
+    can('manage', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
   }
 }
