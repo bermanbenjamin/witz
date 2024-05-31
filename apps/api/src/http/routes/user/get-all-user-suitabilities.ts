@@ -4,7 +4,9 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
 import { prisma } from '@/lib/prisma'
-import { errorSchema } from '@/schema/base-schema'
+import { errorSchema } from '@/schemas/base-schema'
+
+import { BadRequestError } from '../_errors/bad-request-error'
 
 export const responseSchema200 = z.array(z.object({
   id: z.string(),
@@ -45,7 +47,7 @@ export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
         })
   
         if (!userExists) {
-          return reply.status(404).send({ message: 'User not found' })
+          throw new BadRequestError('User not found')
         }
   
         const suitabilities = await prisma.suitability.findMany({

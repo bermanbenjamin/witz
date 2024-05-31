@@ -1,7 +1,9 @@
 import 'fastify'
 
+import type { UserJwt } from '@/models/user-jwt'
+
 declare module 'fastify' {
   export interface FastifyRequest {
-    getCurrentUserId(): Promise<string>
+    getCurrentUserProps(): Promise<UserJwt>
   }
 }

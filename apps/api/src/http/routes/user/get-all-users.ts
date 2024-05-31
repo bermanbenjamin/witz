@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
-import { errorSchema, paginationSchema, userSchema } from '@/schema/base-schema'
+import { errorSchema, paginationSchema, userSchema } from '@/schemas/base-schema'
 
 
 

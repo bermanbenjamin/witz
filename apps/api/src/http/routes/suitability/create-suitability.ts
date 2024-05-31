@@ -2,19 +2,22 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z, ZodError } from 'zod'
 
+import { auth } from '@/http/middlewares/auth'
+import { UnauthorizedError } from '@/http/routes/_errors/unauthorized-error'
 import { prisma } from '@/lib/prisma'
-import { errorSchema, suitabilitySchema } from '@/schema/base-schema'
+import { errorSchema, suitabilitySchema } from '@/schemas/base-schema'
 import { CalculateSuitabilityScore } from '@/service/calculate-score'
+import { getUserPermissions } from '@/utils/get-user-permissions'
 
 export async function createSuitability(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().post(
+  app.withTypeProvider<ZodTypeProvider>().register(auth).post(
     '/suitabilities',
     {
       schema: {
         tags: ['Suitability'],
         summary: 'Create a suitability answer',
+        security: [{ bearerAuth: [] }],
         body: z.object({
-          userId: z.string().min(1),
           questions: z
             .object({
               questionId: z.number(),
@@ -36,7 +39,16 @@ export async function createSuitability(app: FastifyInstance) {
     },
     async (request, reply) => {
       try {
-        const { userId, questions } = request.body
+        const { questions } = request.body
+        const { sub: userId, role } = await request.getCurrentUserProps()
+
+        const { cannot } = getUserPermissions(userId, role)
+
+        if (cannot('create', 'Suitability')) {
+          throw new UnauthorizedError(
+            `You're not allowed to create a new Suitability.`,
+          )
+        }
 
         const userExists = await prisma.user.findFirst({
           where: { id: userId },

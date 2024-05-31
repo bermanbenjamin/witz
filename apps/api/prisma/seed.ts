@@ -51,6 +51,7 @@ async function seed() {
     data: {
       name: 'John Doe',
       email: 'john@acme.com',
+      role: 'ADMIN',
       passwordHash,
       suitabilities: {
         connect: {
