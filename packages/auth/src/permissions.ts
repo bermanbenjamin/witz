@@ -15,11 +15,18 @@ export const permissions: Record<Role, PermissionsByRole> = {
   },
   MEMBER: (user, { can }) => {
     can('get', 'User', { id: {$eq: user.id} }) // Member can read their own User information
+    can('create', 'User', { id: {$eq: user.id} }) // Member can read their own User information
+    can('delete', 'User', { id: {$eq: user.id} }) // Member can read their own User information
     can('get', 'Suitability', { userId: {$eq: user.id} }) // Member can read their own Suitability information
-    can('manage', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
+    can('create', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
+    can('delete', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
   },
   GUEST: (user, { can }) => {
+    can('get', 'User', { id: {$eq: user.id} }) // Member can read their own User information
+    can('update', 'User', { id: {$eq: user.id} }) // Member can read their own User information
+    can('delete', 'User', { id: {$eq: user.id} }) // Member can read their own User information
     can('get', 'Suitability', { userId: {$eq: user.id} }) // Member can read their own Suitability information
-    can('manage', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
+    can('create', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
+    can('delete', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
   }
 }
