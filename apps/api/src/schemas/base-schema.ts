@@ -21,7 +21,9 @@ export const answerSchema = z.object({
 
 export const paginationSchema = z.object({
   page: z.number().int().positive().default(1),
-  pageSize: z.number().int().positive().default(10),
+  limit: z.number().int().positive().default(10),
 });
 
 export const errorSchema =  z.object({ message : z.string()})
+
+export const noContentSchema = z.string().default('No Content')
