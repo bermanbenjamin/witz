@@ -29,13 +29,13 @@ export async function getAllUsers(app: FastifyInstance){
             }
         },
         async (request, reply) => {
-            const { page, pageSize } = request.query;
+            const { page, limit } = request.query;
 
-            const skip = (page - 1) * pageSize;
+            const skip = (page - 1) * limit;
             const totalUsers = await prisma.user.count();
             const users = await prisma.user.findMany({
                 skip,
-                take: pageSize,
+                take: limit,
                 select: {
                     id: true,
                     name: true,
@@ -44,7 +44,7 @@ export async function getAllUsers(app: FastifyInstance){
                 },
             });
 
-            const totalPages = Math.ceil(totalUsers / pageSize);
+            const totalPages = Math.ceil(totalUsers / limit);
 
             return reply.status(200).send({
                 users,
