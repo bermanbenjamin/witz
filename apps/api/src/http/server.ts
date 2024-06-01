@@ -13,6 +13,7 @@ import {
 
 import { errorHandler } from './error-handler'
 import { createSuitability } from './routes/suitability/create-suitability'
+import { deleteSuitabilityById } from './routes/suitability/delete-suitability'
 import { createAccount } from './routes/user/create-account'
 import { getAllSuitabilitiesByUserId } from './routes/user/get-all-user-suitabilities'
 import { getAllUsers } from './routes/user/get-all-users'
@@ -23,6 +24,7 @@ app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
 
 app.setErrorHandler(errorHandler)
+
 app.register(fastifySwagger, {
     openapi: {
       info: {
@@ -57,6 +59,7 @@ app.register(createAccount)
 app.register(createSuitability)
 app.register(getAllSuitabilitiesByUserId)
 app.register(getAllUsers)
+app.register(deleteSuitabilityById)
   
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
