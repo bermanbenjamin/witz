@@ -3,11 +3,12 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z, ZodError } from 'zod'
 
 import { auth } from '@/http/middlewares/auth'
-import { UnauthorizedError } from '@/http/routes/_errors/unauthorized-error'
 import { prisma } from '@/lib/prisma'
 import { errorSchema, suitabilitySchema } from '@/schemas/base-schema'
 import { CalculateSuitabilityScore } from '@/service/calculate-score'
 import { getUserPermissions } from '@/utils/get-user-permissions'
+
+import { MethodNotAllowedError } from '../_errors/method-not-allowed-error'
 
 export async function createSuitability(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().register(auth).post(
@@ -18,6 +19,7 @@ export async function createSuitability(app: FastifyInstance) {
         summary: 'Create a suitability answer',
         security: [{ bearerAuth: [] }],
         body: z.object({
+          userId: z.string().min(0),
           questions: z
             .object({
               questionId: z.number(),
@@ -39,14 +41,14 @@ export async function createSuitability(app: FastifyInstance) {
     },
     async (request, reply) => {
       try {
-        const { questions } = request.body
-        const { sub: userId, role } = await request.getCurrentUserProps()
+        const { questions, userId } = request.body
+        const { sub, role } = await request.getCurrentUserProps()
 
-        const { cannot } = getUserPermissions(userId, role)
+        const { cannot } = getUserPermissions(sub, role)
 
-        if (cannot('create', 'Suitability')) {
-          throw new UnauthorizedError(
-            `You're not allowed to create a new Suitability.`,
+        if(cannot('create', 'Suitability', userId)){
+          throw new MethodNotAllowedError(
+            `You're not allowed to create a new Suitability for this user.`,
           )
         }
 
@@ -57,6 +59,7 @@ export async function createSuitability(app: FastifyInstance) {
         if (!userExists) {
           return reply.status(404).send({ message: 'User not found' })
         }
+
 
         const score = await CalculateSuitabilityScore(questions)
 
