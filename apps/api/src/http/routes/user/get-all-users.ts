@@ -13,9 +13,10 @@ export async function getAllUsers(app: FastifyInstance){
         '/users',
         {
             schema: {
-                description: 'Get all users',
                 tags: ['User'],
-                querystring: paginationSchema,
+                summary: 'Get all users',
+        security: [{ bearerAuth: [] }],
+        querystring: paginationSchema,
                 response: {
                   200: z.object({
                     users: z.array(userSchema),

@@ -11,11 +11,12 @@ import { MethodNotAllowedError } from '../_errors/method-not-allowed-error'
 
 export async function deleteSuitabilityById(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().register(auth).delete(
-    '/suitability/:suitabilityId', 
+    '/suitabilities/:suitabilityId', 
     {
       schema: {
         tags: ['Suitability'],
-        description: 'Delete a suitability by identifier',
+        summary: 'Delete a suitability by Id',
+        security: [{ bearerAuth: [] }],
         params: z.object({
             suitabilityId: z.string(),
         }),

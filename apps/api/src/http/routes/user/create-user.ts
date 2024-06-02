@@ -7,13 +7,14 @@ import { prisma } from '@/lib/prisma'
 
 import { BadRequestError } from '../_errors/bad-request-error'
 
-export async function createAccount(app: FastifyInstance) {
+export async function createUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
     '/users',
     {
       schema: {
-        tags: ['Auth'],
-        summary: 'Create a new account',
+        tags: ['User'],
+        summary: 'Create a new user',
+        security: [{ bearerAuth: [] }],
         body: z.object({
           name: z.string(),
           email: z.string().email(),

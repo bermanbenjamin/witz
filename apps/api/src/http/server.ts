@@ -12,11 +12,15 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from './error-handler'
+import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
 import { createSuitability } from './routes/suitability/create-suitability'
 import { deleteSuitabilityById } from './routes/suitability/delete-suitability'
-import { createAccount } from './routes/user/create-account'
+import { getSuitabilityById } from './routes/suitability/get-suitability-by-id'
+import { createUser } from './routes/user/create-user'
+import { deleteUserById } from './routes/user/delete-user-by-id'
 import { getAllSuitabilitiesByUserId } from './routes/user/get-all-user-suitabilities'
 import { getAllUsers } from './routes/user/get-all-users'
+import { updateUserById } from './routes/user/update-user'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -55,11 +59,15 @@ app.register(fastifyJwt, {
   
 app.register(fastifyCors)
   
-app.register(createAccount)
+app.register(authenticateWithPassword)
+app.register(createUser)
 app.register(createSuitability)
 app.register(getAllSuitabilitiesByUserId)
 app.register(getAllUsers)
 app.register(deleteSuitabilityById)
+app.register(deleteUserById)
+app.register(getSuitabilityById)
+app.register(updateUserById)
   
 
 app.listen({ port: env.SERVER_PORT }).then(() => {

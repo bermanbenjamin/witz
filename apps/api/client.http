@@ -69,3 +69,7 @@ content-type: application/json
 ################################
 
 GET http://localhost:3333/users/2ff31a05-7066-4f95-b99f-2d5fbf003f65/suitabilities
+
+###
+
+GET http://localhost:3333/users

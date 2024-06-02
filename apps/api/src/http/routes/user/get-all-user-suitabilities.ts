@@ -23,13 +23,14 @@ export const responseSchema200 = z.array(z.object({
 
 export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
-    '/users/:userId/suitabilities',
+    '/users/:id/suitabilities',
     {
      schema: {
-      description: 'Get all suitabilities for a user id',
-      tags: ['User'],
+       tags: ['User'],
+      summary: 'Get all suitabilities for a user id',
+      security: [{ bearerAuth: [] }],
       params: z.object({
-        userId: z.string().uuid(),
+        id: z.string().uuid(),
       }),
       response: {
         200: responseSchema200,
@@ -40,10 +41,10 @@ export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
     },
     async (request, reply) => {
       try {
-        const { userId } = request.params
+        const { id } = request.params
 
         const userExists = await prisma.user.findFirst({
-          where: { id: userId },
+          where: { id },
         })
   
         if (!userExists) {
@@ -52,7 +53,7 @@ export async function getAllSuitabilitiesByUserId(app: FastifyInstance) {
   
         const suitabilities = await prisma.suitability.findMany({
           where: {
-            userId,
+            userId: id,
           },
           include: {
             answers: {
