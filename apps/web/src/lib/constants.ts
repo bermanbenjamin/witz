@@ -1,19 +1,29 @@
+import type { NavItemProps } from './types'
 
-export const headerItems = [
+export const appRoutes = {
+  signIn: '/sign-in',
+  signUp: '/sign-up',
+  home: '/home',
+  settings: '/settings',
+  suitability: '/suitability',
+
+  admin: {
+    home: '/admin',
+    users: '/admin/users',
+  },
+}
+
+export const headerItems: NavItemProps[] = [
   {
     name: 'Configurações',
-    path: '/settings',
+    path: appRoutes.settings,
   },
 ]
 
-export const menuItems = [
-  {
-    name: 'Home',
-    path: '/home',
-  },
+export const menuItems: NavItemProps[] = [
   {
     name: 'Suitability',
-    path: '/suitability',
+    path: appRoutes.suitability,
   },
 ]
 

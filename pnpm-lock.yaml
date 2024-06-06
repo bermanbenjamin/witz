@@ -81,6 +81,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@casl/react':
+        specifier: ^3.1.0
+        version: 3.1.0(@casl/ability@6.7.1)(react@18.3.1)
       '@hookform/resolvers':
         specifier: ^3.5.0
         version: 3.5.0(react-hook-form@7.51.5(react@18.3.1))
@@ -99,6 +102,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.17.3
         version: 8.17.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@witz/api':
+        specifier: workspace:*
+        version: link:../api
       '@witz/auth':
         specifier: workspace:*
         version: link:../../packages/auth
@@ -267,6 +273,12 @@ packages:
 
   '@casl/ability@6.7.1':
     resolution: {integrity: sha512-e+Vgrehd1/lzOSwSqKHtmJ6kmIuZbGBlM2LBS5IuYGGKmVHuhUuyh3XgTn1VIw9+TO4gqU+uptvxfIRBUEdJuw==}
+
+  '@casl/react@3.1.0':
+    resolution: {integrity: sha512-p4Xmex1Slxz/G0cBtZik+xyOkeOynBUe0UrMFTai6aYkYOb4NyUy3w+9rtnedjcuKijiow2HKJQjnSurLxdc/g==}
+    peerDependencies:
+      '@casl/ability': ^3.0.0 || ^4.0.0 || ^5.1.0 || ^6.0.0
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -2866,6 +2878,11 @@ snapshots:
   '@casl/ability@6.7.1':
     dependencies:
       '@ucast/mongo2js': 1.3.4
+
+  '@casl/react@3.1.0(@casl/ability@6.7.1)(react@18.3.1)':
+    dependencies:
+      '@casl/ability': 6.7.1
+      react: 18.3.1
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true

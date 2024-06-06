@@ -1,6 +1,6 @@
 import logoWhite from '@/assets/logo-white.svg'
 import { Badge } from '@/components/ui/badge'
-import { headerItems } from '@/lib/constants'
+import { appRoutes, headerItems } from '@/lib/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '../ui/button'
@@ -25,9 +25,9 @@ const Header = () => {
 
       <div className='flex w-full items-center gap-x-8'>
         <div className='flex w-full items-center gap-x-2 justify-end'>
-{headerItems.map((item) => <Link href='' key={item.path}>{item.name}</Link>)}
+{headerItems.map((item) => <Link href={item.path} key={item.path}>{item.name}</Link>)}
         </div>
-        <Button>Fazer Login</Button>
+        <Button><Link href={appRoutes.signUp}>Finalizar cadastro</Link></Button>
       </div>
 
     </section>

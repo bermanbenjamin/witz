@@ -1,7 +1,16 @@
-import { Edit, type LucideIcon } from 'lucide-react'
+import {
+  BadgeCheckIcon,
+  CloudDownloadIcon,
+  EditIcon,
+  FileArchiveIcon,
+  type LucideIcon,
+} from 'lucide-react'
 
 export type IconType = LucideIcon
 
 export const Icons = {
-  update: Edit,
+  update: EditIcon,
+  verified: BadgeCheckIcon,
+  fileArchive: FileArchiveIcon,
+  cloudDownload: CloudDownloadIcon
 }

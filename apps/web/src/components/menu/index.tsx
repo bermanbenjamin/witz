@@ -1,6 +1,7 @@
-import React from 'react'
-import { MenuLink } from './menu-link'
 import { menuItems } from '@/lib/constants'
+import { Can } from '@/providers/ability-provider'
+import { Icons } from '../icons'
+import { MenuLink } from './menu-link'
 
 const Menu = () => {
   return (
@@ -10,6 +11,14 @@ const Menu = () => {
           {item.name}
         </MenuLink>
       ))}
+      <Can I='read' an='User'>
+       <MenuLink href={'/admin/users'}>
+        <div className='flex items-center space-x-2'>
+        <span>Usuários</span>
+        <Icons.verified className='w-3 h-3 text-blue-600' />
+        </div>
+        </MenuLink>
+        </Can>
     </nav>
   )
 }
