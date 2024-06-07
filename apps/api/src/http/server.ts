@@ -4,6 +4,7 @@ import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUI from '@fastify/swagger-ui'
 import { env } from '@witz/env'
 import { fastify } from 'fastify'
+import fastifyMailer from 'fastify-mailer'
 import {
   jsonSchemaTransform,
   serializerCompiler,
@@ -13,6 +14,8 @@ import {
 
 import { errorHandler } from './error-handler'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
+import { magicLinkLogin } from './routes/auth/magic-link-login'
+import { magicLinkVerify } from './routes/auth/magic-link-verify'
 import { createSuitability } from './routes/suitability/create-suitability'
 import { deleteSuitabilityById } from './routes/suitability/delete-suitability'
 import { getSuitabilityById } from './routes/suitability/get-suitability-by-id'
@@ -48,6 +51,19 @@ app.register(fastifySwagger, {
     },
     transform: jsonSchemaTransform,
   })
+
+  app.register(fastifyMailer, {
+    defaults: { from: 'Witz Wealt | Magic Link <delivered@resend.dev>' },
+    transport: {
+      host: 'smtp.resend.com',
+      port: 465,
+      secure: true, // use TLS
+      auth: {
+        user: 'resend',
+        pass: env.RESEND_TOKEN
+      }
+    }
+  })
   
 app.register(fastifySwaggerUI, {
     routePrefix: '/docs',
@@ -55,6 +71,7 @@ app.register(fastifySwaggerUI, {
 
 app.register(fastifyJwt, {
     secret: env.JWT_SECRET,
+    decode: { complete: true },
   })
   
 app.register(fastifyCors)
@@ -68,6 +85,8 @@ app.register(deleteSuitabilityById)
 app.register(deleteUserById)
 app.register(getSuitabilityById)
 app.register(updateUserById)
+app.register(magicLinkLogin)
+app.register(magicLinkVerify)
   
 
 app.listen({ port: env.SERVER_PORT }).then(() => {

@@ -5,6 +5,7 @@
 ### Authentication
 
 - [x] It should be able to authenticate using e-mail & password;
+- [x] It should be able to authenticate using mail link with magiclinks;
 
 ### Users
 

@@ -2,10 +2,20 @@ POST http://localhost:3333/users
 content-type: application/json
 
 {
-    "name": "sample",
-    "email": "test@test.com",
+    "name": "Berman",
+    "email": "bermanschultz29@gmail.com",
     "password": "password"
 }
+
+################################
+
+POST http://localhost:3333/auth/magic-link/login
+content-type: application/json
+
+{
+    "email": "bermanschultz29@gmail.com"
+}
+
 
 ################################
 
@@ -73,3 +83,12 @@ GET http://localhost:3333/users/2ff31a05-7066-4f95-b99f-2d5fbf003f65/suitabiliti
 ###
 
 GET http://localhost:3333/users
+
+##############################
+
+POST http://localhost:3333/auth/magic-link
+content-type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlcm1hbnNjaHVsdHoyOUBnbWFpbC5jb20iLCJpYXQiOjE3MTc3MjgyNzMsImV4cCI6MTcxNzczMDA3M30.6jv_CI_ZnS1eyBf34kTjdbbVDRNsqLF_RFOICnL7awc"
+    }
