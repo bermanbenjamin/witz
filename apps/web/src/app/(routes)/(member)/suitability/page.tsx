@@ -2,6 +2,7 @@ import { Icons } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { suitabilityInitialText } from '@/lib/constants'
+
 import SuitabilityCard from './components/suitability-card'
 
 const SuitabilityPage = () => {

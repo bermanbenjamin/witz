@@ -1,10 +1,12 @@
 'use client'
 
-import logoGreen from '@/assets/logo-green.svg'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import FormSuitability from './components/form-suitability'
+
+import logoGreen from '@/assets/logo-green.svg'
+
 import FormSignIn from './components/form-sign-in'
+import FormSuitability from './components/form-suitability'
 
 const SignIn = () => {
   const searchParams = useSearchParams()

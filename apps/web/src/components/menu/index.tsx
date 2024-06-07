@@ -1,5 +1,6 @@
 import { menuItems } from '@/lib/constants'
 import { Can } from '@/providers/ability-provider'
+
 import { Icons } from '../icons'
 import { MenuLink } from './menu-link'
 

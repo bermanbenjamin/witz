@@ -1,8 +1,10 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
 import logoWhite from '@/assets/logo-white.svg'
 import { Badge } from '@/components/ui/badge'
 import { appRoutes, headerItems } from '@/lib/constants'
-import Image from 'next/image'
-import Link from 'next/link'
+
 import { Button } from '../ui/button'
 
 const Header = () => {

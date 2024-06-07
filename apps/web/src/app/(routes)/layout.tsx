@@ -1,7 +1,8 @@
+import type { UserDTO } from '@witz/api/src/models/user'
+
 import Header from '@/components/header'
 import Menu from '@/components/menu'
 import { AbilityProvider } from '@/providers/ability-provider'
-import type { UserDTO } from '@witz/api/src/models/user'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
 const userProps: UserDTO = {

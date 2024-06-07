@@ -2,7 +2,7 @@
 
 import { createContextualCan } from '@casl/react'
 import { UserDTO } from '@witz/api/src/models/user'
-import { defineAbilityFor, type AppAbility } from '@witz/auth'
+import { type AppAbility, defineAbilityFor } from '@witz/auth'
 import { createContext, type ReactNode } from 'react'
 
 interface Props {

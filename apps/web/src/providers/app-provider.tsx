@@ -1,9 +1,10 @@
 'use client'
 
-import { Toaster } from '@/components/ui/sonner'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { type ThemeProviderProps } from 'next-themes/dist/types'
+
+import { Toaster } from '@/components/ui/sonner'
 
 interface Props {
   children: React.ReactNode
