@@ -7,7 +7,7 @@ import { MenuLink } from './menu-link'
 export function Menu() {
   return (
     <nav className="flex items-center space-x-2 lg:space-x-3">
-      <span className='cursor-not-allowed opacity-80 text-secondary flex items-center'>
+      <span className='cursor-not-allowed opacity-80 text-secondary text-sm flex items-center'>
           Home
           <Icons.lock className='size-3.5 ml-2' />
         </span>

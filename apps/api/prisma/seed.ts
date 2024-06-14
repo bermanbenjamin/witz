@@ -47,19 +47,47 @@ async function seed() {
       }
     })
 
-   await prisma.user.create({
-    data: {
-      name: 'John Doe',
-      email: 'john@acme.com',
-      role: 'ADMIN',
-      passwordHash,
-      suitabilities: {
-        connect: {
-          id: suitability.id
-        }
-      }
-    },
-  })
+    Promise.all([
+      prisma.user.create({
+        data: {
+          name: 'John Doe',
+          email: 'john@acme.com',
+          role: 'ADMIN',
+          passwordHash,
+          suitabilities: {
+            connect: {
+              id: suitability.id
+            }
+          }
+        },
+      }),
+      prisma.user.create({
+        data: {
+          name: 'Antonio Carlos',
+          email: 'test@test.com',
+          role: 'MEMBER',
+          passwordHash,
+          suitabilities: {
+            connect: {
+              id: suitability.id
+            }
+          }
+        },
+      }),
+      prisma.user.create({
+        data: {
+          name: 'Bellitanner',
+          email: 'bahia@bahia.com',
+          role: 'GUEST',
+          passwordHash,
+          suitabilities: {
+            connect: {
+              id: suitability.id
+            }
+          }
+        },
+      }),
+    ])
 }
 
 seed().then(() => {
