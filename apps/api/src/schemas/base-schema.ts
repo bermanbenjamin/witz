@@ -13,6 +13,13 @@ export const suitabilitySchema = z.object({
   score: z.number(),
 });
 
+export const allocationSchema = z.object({ 
+    subCategory: z.string(),
+    macro: z.string(),
+    percent: z.number(),
+    active: z.string(),
+}).array;
+
 export const answerSchema = z.object({
   id: z.string(),
   questionId: z.string(),
