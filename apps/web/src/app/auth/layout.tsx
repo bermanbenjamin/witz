@@ -1,17 +1,18 @@
-'use client'
-
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 import logoGreen from '@/assets/logo-green.svg'
+import { isAuthenticated } from '@/lib/auth'
+import { appRoutes } from '@/lib/constants'
 
-import FormSignIn from './components/form-sign-in'
-import FormSuitability from './components/form-suitability'
-
-const SignIn = () => {
-  const searchParams = useSearchParams()
-
-  const isSuitability = searchParams.get('to') === 'suitability'
+export default function AuthLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  if (isAuthenticated()) {
+    redirect(appRoutes.home)
+  }
 
   return (
     <main className="grid h-screen w-screen grid-cols-2">
@@ -24,15 +25,13 @@ const SignIn = () => {
           className="max-h-20 max-w-96"
         />
         <span className="max-w-96 text-center text-primary">
-          Livres de qualquer amarra com instituições financeiras ou comissões por ativos
-          específicos.
+          Livres de qualquer amarra com instituições financeiras ou comissões
+          por ativos específicos.
         </span>
       </aside>
       <section className="flex flex-col items-center justify-center">
-      {isSuitability ? <FormSuitability />: <FormSignIn />}
+        {children}
       </section>
     </main>
   )
 }
-
-export default SignIn

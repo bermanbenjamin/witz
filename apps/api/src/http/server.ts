@@ -13,6 +13,7 @@ import {
 
 import { errorHandler } from './error-handler'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
+import { getProfile } from './routes/auth/get-profile'
 import { createSuitability } from './routes/suitability/create-suitability'
 import { deleteSuitabilityById } from './routes/suitability/delete-suitability'
 import { getSuitabilityById } from './routes/suitability/get-suitability-by-id'
@@ -58,8 +59,11 @@ app.register(fastifyJwt, {
   })
   
 app.register(fastifyCors)
-  
+
+// Auth
 app.register(authenticateWithPassword)
+app.register(getProfile)
+
 app.register(createUser)
 app.register(createSuitability)
 app.register(getAllSuitabilitiesByUserId)

@@ -1,8 +1,8 @@
 import type { NavItemProps } from './types'
 
 export const appRoutes = {
-  signIn: '/sign-in',
-  signUp: '/sign-up',
+  signIn: '/auth/sign-in',
+  signUp: '/auth/sign-up',
   home: '/home',
   settings: '/settings',
   suitability: '/suitability',

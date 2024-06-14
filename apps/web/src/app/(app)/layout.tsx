@@ -1,22 +1,20 @@
-import type { UserDTO } from '@witz/api/src/models/user'
+import { redirect } from 'next/navigation'
 
 import Header from '@/components/header'
 import Menu from '@/components/menu'
+import { auth, isAuthenticated } from '@/lib/auth'
+import { appRoutes } from '@/lib/constants'
 import { AbilityProvider } from '@/providers/ability-provider'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
-const userProps: UserDTO = {
-  id: '1',
-  name: 'Antonio Carlos',
-  email: 'email@test.com',
-  passwordHash: 'password',
-  role: 'MEMBER',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-}
+  const { user } = await auth()
+
+  if (!isAuthenticated()) {
+    redirect(appRoutes.signIn)
+  }
 
   return (
-    <AbilityProvider user={userProps}>
+    <AbilityProvider user={user}>
     <main className="mx-auto h-screen w-full max-w-7xl">
       <Header />
       <Menu />

@@ -1,10 +1,20 @@
 import { NextResponse } from 'next/server'
 
 export function middleware() {
-  // TODO: Implement middleware to check protected routes (admin)
-  // if(request.nextUrl.pathname === '/admin' && !request.user?.isAdmin) {
-  //   return NextResponse.redirect(appRoutes.home)
-  // }
+  const response = NextResponse.next()
 
-  return NextResponse.next()
+  return response
+}
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
 }

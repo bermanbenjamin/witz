@@ -1,12 +1,16 @@
 'use client'
 
 import { createContextualCan } from '@casl/react'
-import { UserDTO } from '@witz/api/src/models/user'
-import { type AppAbility, defineAbilityFor } from '@witz/auth'
+import { type AppAbility, defineAbilityFor, type Role } from '@witz/auth'
 import { createContext, type ReactNode } from 'react'
 
 interface Props {
-  user: UserDTO
+  user: {
+    id: string;
+    name: string | null;
+    email: string;
+    role: Role
+}
   children: ReactNode
 }
 
@@ -17,9 +21,9 @@ const AbilityContext = createContext<ContextAbility>({} as ContextAbility)
 export const Can = createContextualCan(AbilityContext.Consumer)
 
 const AbilityProvider = ({ user, children }: Props) => {
-  const ability = defineAbilityFor(user)
-
-  return <AbilityContext.Provider value={ability}>{children}</AbilityContext.Provider>
+  const permissions = defineAbilityFor({ id: user.id, role: user.role })
+  
+  return <AbilityContext.Provider value={permissions}>{children}</AbilityContext.Provider>
 }
 
 export { AbilityProvider }
