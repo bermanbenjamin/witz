@@ -24,14 +24,14 @@ export async function Header()  {
         className="h-full max-h-6 w-full max-w-32"
       />
       </Link>
-      <Icons.slash className="size-3 -rotate-[24deg] text-border" />
+      <Icons.slash className="size-3 -rotate-[24deg] text-muted-foreground" />
       <span className='text-sm'>{user.name}</span>
       <Badge variant='custom' className='text-xs'>PERFIL AGRESSIVO</Badge>
       </div>
 
       <div className='flex w-full items-center gap-x-8'>
         <div className='flex w-full items-center gap-x-2 justify-end'>
-{headerItems.map((item) => <Link href={item.path} key={item.path}>{item.name}</Link>)}
+          {headerItems.map((item) => <Link href={item.path} key={item.path}>{item.name}</Link>)}
         </div>
         <Button><Link href={appRoutes.signUp}>Finalizar cadastro</Link></Button>
         <ProfileButton />

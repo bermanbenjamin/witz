@@ -13,12 +13,7 @@ export const appRoutes = {
   },
 }
 
-export const headerItems: NavItemProps[] = [
-  {
-    name: 'Configurações',
-    path: appRoutes.settings,
-  },
-]
+export const headerItems: NavItemProps[] = []
 
 export const menuItems: NavItemProps[] = [
   {
