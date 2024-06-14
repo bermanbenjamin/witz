@@ -14,6 +14,7 @@ import {
 
 import { errorHandler } from './error-handler'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
+import { getProfile } from './routes/auth/get-profile'
 import { magicLinkLogin } from './routes/auth/magic-link-login'
 import { magicLinkVerify } from './routes/auth/magic-link-verify'
 import { createSuitability } from './routes/suitability/create-suitability'
@@ -75,8 +76,11 @@ app.register(fastifyJwt, {
   })
   
 app.register(fastifyCors)
-  
+
+// Auth
 app.register(authenticateWithPassword)
+app.register(getProfile)
+
 app.register(createUser)
 app.register(createSuitability)
 app.register(getAllSuitabilitiesByUserId)

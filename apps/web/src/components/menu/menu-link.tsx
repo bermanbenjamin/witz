@@ -1,4 +1,5 @@
 import { ComponentProps } from 'react'
+
 import { NavLink } from './nav-link'
 
 export function MenuLink(props: ComponentProps<typeof NavLink>) {

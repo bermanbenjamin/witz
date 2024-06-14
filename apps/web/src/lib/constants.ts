@@ -1,8 +1,8 @@
 import type { NavItemProps } from './types'
 
 export const appRoutes = {
-  signIn: '/sign-in',
-  signUp: '/sign-up',
+  signIn: '/auth/sign-in',
+  signUp: '/auth/sign-up',
   home: '/home',
   settings: '/settings',
   suitability: '/suitability',
@@ -13,12 +13,7 @@ export const appRoutes = {
   },
 }
 
-export const headerItems: NavItemProps[] = [
-  {
-    name: 'Configurações',
-    path: appRoutes.settings,
-  },
-]
+export const headerItems: NavItemProps[] = []
 
 export const menuItems: NavItemProps[] = [
   {
