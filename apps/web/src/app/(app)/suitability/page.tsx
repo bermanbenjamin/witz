@@ -5,7 +5,7 @@ import { suitabilityInitialText } from '@/lib/constants'
 
 import SuitabilityCard from './components/suitability-card'
 
-const SuitabilityPage = () => {
+export default function SuitabilityPage() {
   return (
     <section className='w-full'>
       <div className='flex items-center justify-between'>
@@ -36,5 +36,3 @@ const SuitabilityPage = () => {
     </section>
   )
 }
-
-export default SuitabilityPage

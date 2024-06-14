@@ -1,6 +1,6 @@
 import type { Role } from '@witz/auth'
 
-import { api } from './api-client'
+import { api } from '../api-client'
 
 interface GetProfileResponse {
   user: {

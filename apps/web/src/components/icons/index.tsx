@@ -8,6 +8,7 @@ import {
   FileArchiveIcon,
   LoaderIcon,
   type LucideIcon,
+  SlashIcon,
 } from 'lucide-react'
 
 export type IconType = LucideIcon
@@ -20,5 +21,6 @@ export const Icons = {
   eye: EyeIcon,
   eyeOff: EyeOffIcon,
   loader: LoaderIcon,
-  alertTriangle: AlertTriangleIcon
+  alertTriangle: AlertTriangleIcon,
+  slash: SlashIcon
 }

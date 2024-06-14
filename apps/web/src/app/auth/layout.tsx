@@ -11,7 +11,7 @@ export default function AuthLayout({
   children: React.ReactNode
 }>) {
   if (isAuthenticated()) {
-    redirect(appRoutes.home)
+    redirect(appRoutes.suitability)
   }
 
   return (

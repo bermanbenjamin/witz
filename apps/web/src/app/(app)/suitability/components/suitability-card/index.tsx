@@ -1,6 +1,6 @@
 import { Icons } from '@/components/icons'
 
-const SuitabilityCard = () => {
+export default function SuitabilityCard() {
   return (
     <div className="flex cursor-pointer flex-col space-y-2">
       <span className="text-sm font-bold">2023</span>
@@ -11,5 +11,3 @@ const SuitabilityCard = () => {
     </div>
   )
 }
-
-export default SuitabilityCard

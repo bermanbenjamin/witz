@@ -1,5 +1,9 @@
-const UsersPage = () => {
-  return <div>UsersPage</div>
-}
+import FiltersUser from './components/filters-user'
 
-export default UsersPage
+export default function UsersPage() {
+  return (
+    <div className="w-full">
+      <FiltersUser />
+    </div>
+  )
+}

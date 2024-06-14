@@ -4,7 +4,7 @@ import { Can } from '@/providers/ability-provider'
 import { Icons } from '../icons'
 import { MenuLink } from './menu-link'
 
-const Menu = () => {
+export function Menu() {
   return (
     <nav className="flex items-center space-x-2 lg:space-x-3">
       {menuItems.map((item) => (

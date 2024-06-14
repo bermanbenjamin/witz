@@ -15,7 +15,7 @@ export const useFormSignIn = () => {
     signInWithEmailAndPassword,
     () => {
       toast.success('Login efetuado com sucesso!')
-      router.push(appRoutes.home)
+      router.push(appRoutes.suitability)
     },
   )
 
