@@ -3,6 +3,7 @@ import type { NavItemProps } from './types'
 export const appRoutes = {
   signIn: '/auth/sign-in',
   signUp: '/auth/sign-up',
+  magicLink: '/auth/magic-link',
   home: '/home',
   settings: '/settings',
   suitability: '/suitability',
