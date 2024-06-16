@@ -9,7 +9,7 @@ export async function signInWithMagicLink({
 }: SignInWithMagicLinkRequest) {
   console.log(email)
 
-  const result = await api.post('auth/magic-link', {
+  const result = await api.post('auth/magic-link/login', {
     json: {
       email,
     },

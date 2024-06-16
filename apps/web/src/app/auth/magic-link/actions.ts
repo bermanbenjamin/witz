@@ -27,7 +27,6 @@ export async function signInWithMagicLinkAction(data: FormData) {
       email
     })
 
-
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json()

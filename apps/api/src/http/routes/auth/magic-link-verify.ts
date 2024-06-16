@@ -11,7 +11,7 @@ export interface UserMagicLinkJWT {
 }
 
 export async function magicLinkVerify(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().post('/auth/magic-link', {
+  app.withTypeProvider<ZodTypeProvider>().post('/auth/magic-link/verify', {
     schema: {
       tags: ['Auth'],
       summary: 'Authenticate with magic link token',
