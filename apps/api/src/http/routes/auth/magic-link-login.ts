@@ -5,24 +5,26 @@ import { z } from 'zod'
 export async function magicLinkLogin(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
-    .post('/auth/magic-link/login', 
-    {
-      schema: {
-        tags: ['Auth'],
-        body: z.object({
-          email: z.string().email(),
-        })
-      }
-    },
-    async (req, res) => {
-       try {
-      const { email} = req.body;
+    .post('/auth/magic-link/login',
+      {
+        schema: {
+          tags: ['Auth'],
+          summary: 'Authenticate with magic link',
+          body: z.object({
+            email: z.string().email(),
+            name: z.string(),
+          })
+        }
+      },
+    async (request, reply) => {
+      const { email, name } = request.body;
 
       const { mailer } = app;
 
-      const token = await res.jwtSign(
+      const token = await reply.jwtSign(
         {
           email,
+          name,
         },
         {
           sign: {
@@ -31,17 +33,14 @@ export async function magicLinkLogin(app: FastifyInstance) {
         },
       )
 
-      const magicLink = `http://localhost:3000/auth/magic-link/${token}`;
+      const magicLink = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/magic-link/${token}`;
 
-        await mailer.sendMail({
-          to: email, 
-          subject: "Magic Link", 
-          text: `Hi, click on this link to continue to the app: ${magicLink}`, 
-        });
-        
-        res.send();
-      } catch (error) {
-        res.status(500).send(error);
-      }
-     })
+      await mailer.sendMail({
+        to: email,
+        subject: "Magic Link",
+        text: `Hi ${name}, click on this link to continue to the app: ${magicLink}`,
+      });
+
+      reply.send();
+    })
 }

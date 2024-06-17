@@ -11,6 +11,7 @@ export const env = createEnv({
   client: {},
   shared: {
     NEXT_PUBLIC_API_URL: z.string().url(),
+    NEXT_PUBLIC_BASE_URL: z.string().url(),
   },
   runtimeEnv: {
     SERVER_PORT: process.env.SERVER_PORT,
@@ -18,6 +19,7 @@ export const env = createEnv({
     JWT_SECRET: process.env.JWT_SECRET,
     RESEND_TOKEN: process.env.RESEND_TOKEN,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
   emptyStringAsUndefined: true, // To considering empty strings env variables as undefined
 })

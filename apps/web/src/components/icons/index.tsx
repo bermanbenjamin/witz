@@ -3,6 +3,7 @@ import {
   ArrowDownIcon,
   ArrowUpIcon,
   BadgeCheckIcon,
+  CheckCheck,
   ChevronsUpDownIcon,
   CloudDownloadIcon,
   EditIcon,
@@ -36,5 +37,6 @@ export const Icons = {
   settings: Settings2Icon,
   horizontalEllipsis: EllipsisIcon,
   delete: Trash2Icon,
-  lock: LockIcon
+  lock: LockIcon,
+  doubleCheck: CheckCheck
 }

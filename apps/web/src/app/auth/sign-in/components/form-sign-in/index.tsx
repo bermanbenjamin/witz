@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label'
 import { useFormSignIn } from './use-form-sign-in'
 
 const FormSignIn = () => {
-  const { handleSubmit, isPending,errors, success, message, showPassword, setShowPassword } = useFormSignIn()
+  const { handleSubmit, isPending, errors, success, message, showPassword, setShowPassword } = useFormSignIn()
 
   return (
     <div className='max-w-80 w-full'>
@@ -18,11 +18,11 @@ const FormSignIn = () => {
         <span>Insira suas informações para avançar</span>
       </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="gap-y-3 flex flex-col w-full mt-4"
-          >
-            {success === false && message && (
+      <form
+        onSubmit={handleSubmit}
+        className="gap-y-3 flex flex-col w-full mt-4"
+      >
+        {success === false && message && (
           <Alert variant="destructive">
             <Icons.alertTriangle className="size-4" />
             <AlertTitle>Erro ao realizar login</AlertTitle>
@@ -32,22 +32,22 @@ const FormSignIn = () => {
           </Alert>
         )}
 
-<div className="space-y-1">
-                    <Label htmlFor="email">Email</Label>
-                      <Input
-                        placeholder="email@gmail.com"
-                        name="email" type="email" id="email"
-                      />
-                      {errors?.email && (
+        <div className="space-y-1">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            placeholder="email@gmail.com"
+            name="email" type="email" id="email"
+          />
+          {errors?.email && (
             <p className="text-xs font-medium text-red-500 dark:text-red-400">
               {errors.email[0]}
             </p>
           )}
-          </div>
+        </div>
 
-          <div className="space-y-1">
+        <div className="space-y-1">
           <div className="flex w-full items-center justify-between pr-2">
-          <Label htmlFor="password">Senha</Label>
+            <Label htmlFor="password">Senha</Label>
             {showPassword ? (
               <Icons.eye
                 className="size-4 cursor-pointer"
@@ -60,35 +60,35 @@ const FormSignIn = () => {
               />
             )}
           </div>
-                    
-                      <Input
-                        placeholder="******"
-                        name="password"
+
+          <Input
+            placeholder="******"
+            name="password"
             type={showPassword ? 'text' : 'password'}
             id="password"
-                      />
-                      {errors?.password && (
+          />
+          {errors?.password && (
             <p className="text-xs font-medium text-red-500 dark:text-red-400">
               {errors.password[0]}
             </p>
           )}
-                      </div>
-          
-                      <Link
-            href="/auth/forgot-password"
-            className="text-xs font-medium text-foreground hover:underline"
-          >
-            Esqueceu sua senha?
-          </Link>
+        </div>
 
-              <Button variant='secondary' type="submit" className='w-full mt-4' disabled={isPending}>{isPending ? (
-            <Icons.loader className="size-4 animate-spin" />
-          ) : (
-            'Acessar'
-          )}</Button>
-          </form>
+        <Link
+          href="/auth/forgot-password"
+          className="text-xs font-medium text-foreground hover:underline"
+        >
+          Esqueceu sua senha?
+        </Link>
 
-          <Button className='w-full mt-6' asChild><Link href="/auth/sign-up">Registrar-se</Link></Button>
+        <Button variant='secondary' type="submit" className='w-full mt-4' disabled={isPending}>{isPending ? (
+          <Icons.loader className="size-4 animate-spin" />
+        ) : (
+          'Acessar'
+        )}</Button>
+      </form>
+
+      <Button className='w-full mt-6' asChild><Link href="/auth/sign-up">Registrar-se</Link></Button>
     </div>
   )
 }

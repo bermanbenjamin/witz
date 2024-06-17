@@ -86,7 +86,7 @@ GET http://localhost:3333/users
 
 ##############################
 
-POST http://localhost:3333/auth/magic-link
+POST http://localhost:3333/auth/magic-link/verify
 content-type: application/json
 
 {
