@@ -9,39 +9,38 @@ export async function magicLinkLogin(app: FastifyInstance) {
       {
         schema: {
           tags: ['Auth'],
+          summary: 'Authenticate with magic link',
           body: z.object({
             email: z.string().email(),
+            name: z.string(),
           })
         }
       },
-      async (req, res) => {
-        try {
-          const { email } = req.body;
+    async (request, reply) => {
+      const { email, name } = request.body;
 
-          const { mailer } = app;
+      const { mailer } = app;
 
-          const token = await res.jwtSign(
-            {
-              email,
-            },
-            {
-              sign: {
-                expiresIn: '30m',
-              },
-            },
-          )
+      const token = await reply.jwtSign(
+        {
+          email,
+          name,
+        },
+        {
+          sign: {
+            expiresIn: '30m',
+          },
+        },
+      )
 
-          const magicLink = `http://localhost:3000/auth/magic-link/${token}`;
+      const magicLink = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/magic-link/${token}`;
 
-          await mailer.sendMail({
-            to: email,
-            subject: "Magic Link",
-            text: `Hi, click on this link to continue to the app: ${magicLink}`,
-          });
+      await mailer.sendMail({
+        to: email,
+        subject: "Magic Link",
+        text: `Hi ${name}, click on this link to continue to the app: ${magicLink}`,
+      });
 
-          res.send();
-        } catch (error) {
-          res.status(500).send(error);
-        }
-      })
+      reply.send();
+    })
 }

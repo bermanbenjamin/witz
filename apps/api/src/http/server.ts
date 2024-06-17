@@ -54,7 +54,7 @@ app.register(fastifySwagger, {
   })
 
   app.register(fastifyMailer, {
-    defaults: { from: 'Witz Wealt | Magic Link <delivered@resend.dev>' },
+    defaults: { from: 'Witz Wealth | Magic Link <delivered@resend.dev>' },
     transport: {
       host: 'smtp.resend.com',
       port: 465,
@@ -80,17 +80,20 @@ app.register(fastifyCors)
 // Auth
 app.register(authenticateWithPassword)
 app.register(getProfile)
-
-app.register(createUser)
-app.register(createSuitability)
-app.register(getAllSuitabilitiesByUserId)
-app.register(getAllUsers)
-app.register(deleteSuitabilityById)
-app.register(deleteUserById)
-app.register(getSuitabilityById)
-app.register(updateUserById)
 app.register(magicLinkLogin)
 app.register(magicLinkVerify)
+
+// User
+app.register(createUser)
+app.register(getAllUsers)
+app.register(deleteUserById)
+app.register(updateUserById)
+
+// Suitability
+app.register(createSuitability)
+app.register(getAllSuitabilitiesByUserId)
+app.register(deleteSuitabilityById)
+app.register(getSuitabilityById)
   
 
 app.listen({ port: env.SERVER_PORT }).then(() => {

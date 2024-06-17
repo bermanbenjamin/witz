@@ -38,5 +38,5 @@ export const Icons = {
   horizontalEllipsis: EllipsisIcon,
   delete: Trash2Icon,
   lock: LockIcon,
-  checkCheck: CheckCheck
+  doubleCheck: CheckCheck
 }

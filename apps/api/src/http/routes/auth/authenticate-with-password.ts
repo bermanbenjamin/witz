@@ -34,14 +34,8 @@ export async function authenticateWithPassword(app: FastifyInstance) {
         },
       })
 
-      if (!userFromEmail) {
-        throw new BadRequestError('Invalid credentials.')
-      }
-
-      if (userFromEmail.passwordHash === null) {
-        throw new BadRequestError(
-          'User does not have a password, use social login.',
-        )
+      if (!userFromEmail || userFromEmail.passwordHash === null) {
+        throw new BadRequestError('Credenciais Inválidas.')
       }
 
       const isPasswordValid = await compare(
@@ -50,7 +44,7 @@ export async function authenticateWithPassword(app: FastifyInstance) {
       )
 
       if (!isPasswordValid) {
-        throw new BadRequestError('Invalid credentials.')
+        throw new BadRequestError('Credenciais Inválidas.')
       }
 
       const token = await reply.jwtSign(
