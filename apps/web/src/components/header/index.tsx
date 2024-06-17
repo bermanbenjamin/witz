@@ -9,23 +9,25 @@ import { Button } from '@/components/ui/button'
 import { auth } from '@/lib/auth'
 import { appRoutes, headerItems } from '@/lib/constants'
 
-export async function Header()  {
+export async function Header() {
   const { user } = await auth()
-  
+
+
   return (
     <section className="flex w-full items-center justify-between pt-9 pb-6">
       <div className='flex items-center space-x-3 w-full'>
         <Link href={appRoutes.suitability}>
-      <Image
-        src={logoWhite}
-        alt="logo-white"
-        height={1000}
-        width={1000}
-        className="h-full max-h-6 w-full max-w-32"
-      />
-      </Link>
-      <Icons.slash className="size-3 -rotate-[24deg] text-muted-foreground" />
-      <span className='text-sm'>{user.name}</span>
+          <Image
+            src={logoWhite}
+            alt="logo-white"
+            height={1000}
+            width={1000}
+            className="h-full max-h-6 w-full max-w-32"
+          />
+        </Link>
+        <Icons.slash className="size-3 -rotate-[24deg] text-muted-foreground" />
+        <span className='text-sm'>{user.name}</span>
+        <Badge variant='custom' className='text-xs'>{user.profileType}</Badge>
       </div>
 
       <div className='flex w-full items-center gap-x-8'>

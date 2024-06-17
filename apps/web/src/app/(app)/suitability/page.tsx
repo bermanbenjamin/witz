@@ -1,22 +1,24 @@
 import { Icons } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { auth } from '@/lib/auth'
 import { suitabilityInitialText } from '@/lib/constants'
 
 import SuitabilityCard from './components/suitability-card'
 
-export default function SuitabilityPage() {
+export default async function SuitabilityPage() {
+  const { user } = await auth()
   return (
     <section className='w-full'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center space-x-6'>
           <h1 className='font-semibold text-3xl'>Suitability</h1>
-          <Badge variant='custom'>PERFIL AGRESSIVO</Badge>
+          <Badge variant='custom'>{user.profileType}</Badge>
         </div>
         <Button className='flex items-center gap-x-2'>
           <Icons.update className='w-4 h-4' />
           Responder questionário
-          </Button>
+        </Button>
       </div>
 
       <div className='w-full mt-4'>
@@ -25,8 +27,8 @@ export default function SuitabilityPage() {
 
       <div className='flex flex-col gap-y-5 mt-12'>
         <div className='flex items-center space-x-1'>
-        <Icons.fileArchive className='w-6 h-6' />
-        <h1 className='text-xl font-semibold'>Histórico</h1>
+          <Icons.fileArchive className='w-6 h-6' />
+          <h1 className='text-xl font-semibold'>Histórico</h1>
         </div>
         <div className='grid grid-cols-5 gap-x-10'>
           <SuitabilityCard />
