@@ -12,82 +12,85 @@ async function seed() {
 
   const passwordHash = await hash('123456', 1)
 
-   const suitability = await prisma.suitability.create({
-      data: {
-        score: 10,
-      }
-    })
-    
-    const [answer1, answer2] = await prisma.$transaction([
-      prisma.answer.create({
-        data: {
-         questionId: 1,
-         suitabilityId:  suitability.id,
-        }
-       }),
-      prisma.answer.create({
-        data: {
-         questionId: 2,
-         suitabilityId:  suitability.id,
-        }
-       }),
-    ])
+  const suitability = await prisma.suitability.create({
+    data: {
+      score: 10,
+    }
+  })
 
-    await prisma.suitability.update({
-      where: {
-        id: suitability.id
+  const [answer1, answer2] = await prisma.$transaction([
+    prisma.answer.create({
+      data: {
+        questionId: 1,
+        suitabilityId: suitability.id,
+      }
+    }),
+    prisma.answer.create({
+      data: {
+        questionId: 2,
+        suitabilityId: suitability.id,
+      }
+    }),
+  ])
+
+  await prisma.suitability.update({
+    where: {
+      id: suitability.id
+    },
+    data: {
+      answers: {
+        connect: [
+          { id: answer1.id },
+          { id: answer2.id },
+        ]
+      }
+    }
+  })
+
+  Promise.all([
+    prisma.user.create({
+      data: {
+        name: 'John Doe',
+        email: 'john@acme.com',
+        role: 'ADMIN',
+        passwordHash,
+        profileType: 'MODERATE',
+        suitabilities: {
+          connect: {
+            id: suitability.id
+          }
+        }
       },
+    }),
+    prisma.user.create({
       data: {
-        answers: {
-          connect: [
-            { id: answer1.id },
-            { id: answer2.id },
-          ]
+        name: 'Antonio Carlos',
+        email: 'test@test.com',
+        role: 'MEMBER',
+        passwordHash,
+        profileType: 'MODERATE',
+        suitabilities: {
+          connect: {
+            id: suitability.id
+          }
         }
-      }
-    })
-
-    Promise.all([
-      prisma.user.create({
-        data: {
-          name: 'John Doe',
-          email: 'john@acme.com',
-          role: 'ADMIN',
-          passwordHash,
-          suitabilities: {
-            connect: {
-              id: suitability.id
-            }
+      },
+    }),
+    prisma.user.create({
+      data: {
+        name: 'Bellitanner',
+        email: 'bahia@bahia.com',
+        role: 'GUEST',
+        passwordHash,
+        profileType: 'MODERATE',
+        suitabilities: {
+          connect: {
+            id: suitability.id
           }
-        },
-      }),
-      prisma.user.create({
-        data: {
-          name: 'Antonio Carlos',
-          email: 'test@test.com',
-          role: 'MEMBER',
-          passwordHash,
-          suitabilities: {
-            connect: {
-              id: suitability.id
-            }
-          }
-        },
-      }),
-      prisma.user.create({
-        data: {
-          name: 'Bellitanner',
-          email: 'bahia@bahia.com',
-          role: 'GUEST',
-          passwordHash,
-          suitabilities: {
-            connect: {
-              id: suitability.id
-            }
-          }
-        },
-      }),
-    ])
+        }
+      },
+    }),
+  ])
 }
 
 seed().then(() => {

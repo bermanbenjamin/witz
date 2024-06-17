@@ -1,3 +1,4 @@
+import { ProfileType } from '@prisma/client'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z, ZodError } from 'zod'
@@ -30,7 +31,21 @@ export async function createSuitability(app: FastifyInstance) {
             .max(12),
         }),
         response: {
-          201: suitabilitySchema,
+          201: z.object({
+            suitability: suitabilitySchema,
+            updatedUser: z.object({
+              name: z.string().nullable(),
+              email: z.string().email(),
+              profileType: z
+                .enum([
+                  'SUPER_CONSERVER',
+                  'CONSERVER',
+                  'MODERATE',
+                  'AGRESSIVE',
+                  'SUPER_AGRESSIVE',
+                ]),
+            })
+          }),
           404: errorSchema,
           400: z.object({ message: z.any() }),
           500: errorSchema
@@ -46,7 +61,7 @@ export async function createSuitability(app: FastifyInstance) {
 
         const { cannot } = getUserPermissions(sub, role)
 
-        if(cannot('create', 'Suitability', userId)){
+        if (cannot('create', 'Suitability', userId)) {
           throw new MethodNotAllowedError(
             `You're not allowed to create a new Suitability for this user.`,
           )
@@ -62,29 +77,59 @@ export async function createSuitability(app: FastifyInstance) {
 
 
         const score = await CalculateSuitabilityScore(questions)
+        let profileType: ProfileType;
 
-        const suitability = await prisma.suitability.create({
-          data: {
-            userId,
-            answers: {
-              createMany: {
-                data: questions.map((question) => ({
-                  questionId: question.questionId,
-                  choosedAlternativesId: question.choosedAlternativesId,
-                })),
+        if (score <= 350) {
+          profileType = ProfileType.SUPER_CONSERVER;
+        } else if (score <= 600) {
+          profileType = ProfileType.CONSERVER;
+        } else if (score <= 1300) {
+          profileType = ProfileType.MODERATE;
+        } else if (score <= 2000) {
+          profileType = ProfileType.AGRESSIVE;
+        } else {
+          profileType = ProfileType.SUPER_AGRESSIVE;
+        }
+
+        const [suitability, updatedUser] = await prisma.$transaction([
+          prisma.suitability.create({
+            data: {
+              userId,
+              answers: {
+                createMany: {
+                  data: questions.map((question) => ({
+                    questionId: question.questionId,
+                    choosedAlternativesId: question.choosedAlternativesId,
+                  })),
+                },
               },
+              score,
             },
-            score,
-          },
-          select: {
-            id: true,
-            createdAt: true,
-            score: true,
-            answers: true,
-          }
-        })
+            select: {
+              id: true,
+              createdAt: true,
+              score: true,
+              answers: true,
+            }
+          }),
 
-        return reply.status(201).send(suitability)
+          prisma.user.update({
+            where: {
+              id: userId,
+            },
+            data: {
+              profileType
+            },
+            select: {
+              name: true,
+              email: true,
+              profileType: true,
+            }
+          })
+
+        ])
+
+        return reply.status(201).send({ suitability, updatedUser });
       } catch (error) {
         if (error instanceof ZodError) {
           return reply.status(400).send({ message: error.errors })

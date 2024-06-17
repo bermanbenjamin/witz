@@ -8,6 +8,7 @@ interface GetProfileResponse {
     name: string | null
     email: string
     role: Role
+    profile
   }
 }
 

@@ -26,7 +26,6 @@ export async function Header()  {
       </Link>
       <Icons.slash className="size-3 -rotate-[24deg] text-muted-foreground" />
       <span className='text-sm'>{user.name}</span>
-      <Badge variant='custom' className='text-xs'>PERFIL AGRESSIVO</Badge>
       </div>
 
       <div className='flex w-full items-center gap-x-8'>
