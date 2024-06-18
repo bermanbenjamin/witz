@@ -15,7 +15,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <AbilityProvider user={user}>
-    <main className="mx-auto h-screen w-full max-w-7xl">
+    <main className="mx-auto h-screen w-full max-w-[1440px] px-8">
       <Header />
       <Menu />
       <section className="py-6">{children}</section>

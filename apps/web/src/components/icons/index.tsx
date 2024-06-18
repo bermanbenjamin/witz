@@ -11,12 +11,14 @@ import {
   EyeIcon,
   EyeOffIcon,
   FileArchiveIcon,
+  HomeIcon,
   LoaderIcon,
   LockIcon,
   type LucideIcon,
   Settings2Icon,
   SlashIcon,
   Trash2Icon,
+  UsersIcon,
 } from 'lucide-react'
 
 export type IconType = LucideIcon
@@ -38,5 +40,7 @@ export const Icons = {
   horizontalEllipsis: EllipsisIcon,
   delete: Trash2Icon,
   lock: LockIcon,
-  doubleCheck: CheckCheck
+  doubleCheck: CheckCheck,
+  users: UsersIcon,
+  home: HomeIcon,
 }
