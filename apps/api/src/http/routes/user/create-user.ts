@@ -42,7 +42,6 @@ export async function createUser(app: FastifyInstance) {
           name,
           email,
           passwordHash,
-          profileType: 'MODERATE',
         },
       })
       return reply.status(201).send()
