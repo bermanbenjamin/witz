@@ -37,7 +37,7 @@ export async function createSuitability(app: FastifyInstance) {
             updatedUser: z.object({
               name: z.string().nullable(),
               email: z.string().email(),
-              profileType: profileSchema,
+              profileType: profileSchema.nullable(),
             })
           }),
           404: errorSchema,
