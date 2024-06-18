@@ -1,3 +1,4 @@
+import type { ProfileType } from '@witz/api/src/models/profile-type'
 import type { Role } from '@witz/auth'
 
 import { api } from '../api-client'
@@ -8,6 +9,7 @@ interface GetProfileResponse {
     name: string | null
     email: string
     role: Role
+    profileType: ProfileType
   }
 }
 
