@@ -5,6 +5,7 @@ import { z, ZodError } from 'zod'
 
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
+import { profileSchema } from '@/models/profile-type'
 import { errorSchema, suitabilitySchema } from '@/schemas/base-schema'
 import { CalculateSuitabilityScore } from '@/service/calculate-score'
 import { getUserPermissions } from '@/utils/get-user-permissions'
@@ -36,14 +37,7 @@ export async function createSuitability(app: FastifyInstance) {
             updatedUser: z.object({
               name: z.string().nullable(),
               email: z.string().email(),
-              profileType: z
-                .enum([
-                  'SUPER_CONSERVER',
-                  'CONSERVER',
-                  'MODERATE',
-                  'AGRESSIVE',
-                  'SUPER_AGRESSIVE',
-                ]),
+              profileType: profileSchema,
             })
           }),
           404: errorSchema,
