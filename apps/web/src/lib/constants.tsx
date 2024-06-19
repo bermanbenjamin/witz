@@ -1,3 +1,5 @@
+import { Icons } from '@/components/icons'
+
 import type { NavItemProps } from './types'
 
 export const appRoutes = {
@@ -21,6 +23,19 @@ export const menuItems: NavItemProps[] = [
   {
     name: 'Suitability',
     path: appRoutes.suitability,
+  },
+]
+
+export const adminMenuItems: NavItemProps[] = [
+  {
+    icon: <Icons.home className="size-4 text-primary" />,
+    name: 'Home',
+    path: appRoutes.admin.home,
+  },
+  {
+    icon: <Icons.users className="size-4 text-primary" />,
+    name: 'Clientes',
+    path: appRoutes.admin.users,
   },
 ]
 
