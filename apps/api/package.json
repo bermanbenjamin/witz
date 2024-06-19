@@ -8,7 +8,8 @@
     "prisma:migrate:deploy": "pnpm env:load prisma migrate deploy",
     "prisma:migrate:reset": "pnpm env:load prisma migrate reset --force",
     "prisma:studio": "pnpm env:load prisma studio",
-    "env:load": "dotenv -e ../../.env --"
+    "env:load": "dotenv -e ../../.env --",
+    "vercel-build": "pnpm env:load prisma migrate deploy"
   },
   "dependencies": {
     "@fastify/cors": "^9.0.1",

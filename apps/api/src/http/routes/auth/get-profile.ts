@@ -26,7 +26,7 @@ export async function getProfile(app: FastifyInstance) {
                 name: z.string().nullable(),
                 email: z.string().email(),
                 role: z.string(),
-                profileType: profileSchema
+                profileType: profileSchema.nullable(),
               }),
             }),
           },
