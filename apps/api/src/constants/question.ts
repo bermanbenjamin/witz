@@ -7,6 +7,7 @@ type Alternative = {
 export type QuestionType = {
   questionNumber: number
   name: string
+  isMultipleChoices: boolean
   alternatives: Alternative[]
 }
 
@@ -14,6 +15,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 1,
     name: 'Qual seu nível de formação acadêmica?',
+    isMultipleChoices: false,
     alternatives: [
       { alternativeNumber: 1, text: 'Ensino fundamental', weight: 0 },
       { alternativeNumber: 2, text: 'Ensino médio', weight: 5 },
@@ -28,6 +30,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 2,
     name: 'Como você avalia sua experiência com investimentos/mercado financeiro?',
+    isMultipleChoices: false,
     alternatives: [
       {
         alternativeNumber: 1,
@@ -49,6 +52,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 3,
     name: 'Em qual perfil de retorno e risco esperados você melhor se encaixa?',
+    isMultipleChoices: false,
     alternatives: [
       {
         alternativeNumber: 1,
@@ -80,6 +84,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 4,
     name: 'Qual a perda máxima tolerada em um período de 1 (um) ano?',
+    isMultipleChoices: false,
     alternatives: [
       {
         alternativeNumber: 1,
@@ -95,6 +100,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 5,
     name: 'Você possui familiaridade ou já realizou investimentos de algum desses tipos no passado?',
+    isMultipleChoices: true,
     alternatives: [
       { alternativeNumber: 1, text: 'Poupança', weight: 0 },
       {
@@ -134,6 +140,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 6,
     name: 'Qual volume você investiu nos últimos 12 meses?',
+    isMultipleChoices: false,
     alternatives: [
       {
         alternativeNumber: 1,
@@ -155,6 +162,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 7,
     name: 'Qual o seu horizonte aproximado de tempo para esta carteira de investimento?',
+    isMultipleChoices: false,
     alternatives: [
       { alternativeNumber: 1, text: 'Até 1 ano', weight: 0 },
       { alternativeNumber: 2, text: 'De 1 ano a 3 anos', weight: 5 },
@@ -165,6 +173,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 8,
     name: 'Como você reage às oscilações do mercado financeiro?',
+    isMultipleChoices: false,
     alternatives: [
       {
         alternativeNumber: 1,
@@ -186,6 +195,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 9,
     name: 'Qual a probabilidade de algum desembolso extraordinário relevante dos recursos alocados nessa carteira nos próximos 5 anos?',
+    isMultipleChoices: false,
     alternatives: [
       { alternativeNumber: 1, text: 'Alta', weight: 0 },
       { alternativeNumber: 2, text: 'Média', weight: 5 },
@@ -196,6 +206,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 10,
     name: 'Qual faixa de valor corresponde à sua renda mensal?',
+    isMultipleChoices: false,
     alternatives: [
       { alternativeNumber: 1, text: 'Até R$ 10.000', weight: 0 },
       { alternativeNumber: 2, text: 'De R$ 10.000 até R$ 20.000', weight: 0 },
@@ -206,6 +217,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 11,
     name: 'Selecione quais ativos que compõem seu patrimônio total atual',
+    isMultipleChoices: false,
     alternatives: [
       { alternativeNumber: 1, text: 'Poupança', weight: 0 },
       {
@@ -245,6 +257,7 @@ export const questions: QuestionType[] = [
   {
     questionNumber: 12,
     name: 'Qual faixa de valor corresponde ao seu patrimônio?',
+    isMultipleChoices: false,
     alternatives: [
       { alternativeNumber: 1, text: 'Até R$ 300.000,00', weight: 0 },
       {

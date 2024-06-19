@@ -1,8 +1,10 @@
+import { redirect } from 'next/navigation'
+
 import { Icons } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { auth } from '@/lib/auth'
-import { suitabilityInitialText } from '@/lib/constants'
+import { appRoutes, suitabilityInitialText } from '@/lib/constants'
 
 import SuitabilityCard from './components/suitability-card'
 
@@ -15,7 +17,7 @@ export default async function SuitabilityPage() {
           <h1 className='font-semibold text-3xl'>Suitability</h1>
           <Badge variant='custom'>{user.profileType}</Badge>
         </div>
-        <Button className='flex items-center gap-x-2'>
+        <Button onClick={redirect(appRoutes.createSuitability)} className='flex items-center gap-x-2'>
           <Icons.update className='w-4 h-4' />
           Responder questionário
         </Button>

@@ -34,7 +34,8 @@ export async function Header() {
         <div className='flex w-full items-center gap-x-2 justify-end'>
           {headerItems.map((item) => <Link href={item.path} key={item.path}>{item.name}</Link>)}
         </div>
-        <Button><Link href={appRoutes.signUp}>Finalizar cadastro</Link></Button>
+        {user.role === 'GUEST' ?
+          <Button><Link href={appRoutes.signUp}>Finalizar cadastro</Link></Button> : null}
         <ProfileButton />
       </div>
 

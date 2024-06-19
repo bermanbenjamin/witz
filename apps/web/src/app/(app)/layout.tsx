@@ -15,11 +15,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <AbilityProvider user={user}>
-    <main className="mx-auto h-screen w-full max-w-7xl">
-      <Header />
-      <Menu />
-      <section className="py-6">{children}</section>
-    </main>
+      <main className="mx-auto h-screen w-full max-w-7xl">
+        <Header />
+        <Menu />
+        <section className="py-6">{children}</section>
+      </main>
     </AbilityProvider>
   )
 }

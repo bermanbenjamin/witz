@@ -1,6 +1,6 @@
 {
   "extends": "@witz/tsconfig/library.json",
   "include": [
-    "src/**/*",
+    "src/**/*", "../../apps/api/src/models/profile-type.ts",
   ]
 }

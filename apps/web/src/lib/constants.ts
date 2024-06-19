@@ -7,6 +7,7 @@ export const appRoutes = {
   home: '/home',
   settings: '/settings',
   suitability: '/suitability',
+  createSuitability: '/suitability/create',
 
   admin: {
     home: '/admin',
