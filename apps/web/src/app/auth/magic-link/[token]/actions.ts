@@ -10,8 +10,8 @@ export async function signInWithMagicLinkVerifierAction(secret: string) {
     const { token } = await verifyMagicLink({
       secret,
     })
-    setInCookies(token)
 
+    setInCookies(token)
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json()

@@ -1,24 +1,16 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { toast } from 'sonner'
 
-const formSchema = z.object({
-  name: z.string({message: 'Nome é obrigatório.'}).min(1, {
-    message: 'Nome é obrigatório.'
-  }),
-  email: z.string({message: 'Email é obrigatório.'}).email({
-    message: 'Email inválido.'
-  })
-})
+import { useFormState } from '@/hooks/use-form-state'
 
-type FormSuitabilityFormValues = z.infer<typeof formSchema>
+import { signInWithMagicLinkAction } from '../../actions'
 
 export const useFormSuitability = () => {
-  const form = useForm<FormSuitabilityFormValues>({
-    resolver: zodResolver(formSchema),
-  })
-
-  const onSubmit = (values: FormSuitabilityFormValues) => console.log(values)
+  const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
+    signInWithMagicLinkAction,
+    () => {
+      toast.success('Email enviado com sucesso!')
+    },
+  )
   
-  return {form,onSubmit}
+  return { errors, message, success, handleSubmit, isPending }
 }

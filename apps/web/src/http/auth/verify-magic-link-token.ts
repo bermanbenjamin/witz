@@ -9,9 +9,6 @@ interface VerifyMagicLinkResponse {
 }
 
 export async function verifyMagicLink({ secret }: VerifyMagicLinkRequest) {
-  console.log(secret);
-
-
   const result = await api
     .post('auth/magic-link/verify', {
       json: {
@@ -19,9 +16,6 @@ export async function verifyMagicLink({ secret }: VerifyMagicLinkRequest) {
       },
     })
     .json<VerifyMagicLinkResponse>()
-
-  console.log("result =" + result);
-
 
   return result
 }
