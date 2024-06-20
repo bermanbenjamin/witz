@@ -84,6 +84,9 @@ importers:
       '@witz/tsconfig':
         specifier: workspace:*
         version: link:../../config/typescript-config
+      dotenv-cli:
+        specifier: ^7.4.2
+        version: 7.4.2
       esbuild:
         specifier: ^0.20.1
         version: 0.20.2
