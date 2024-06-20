@@ -97,8 +97,9 @@ app.register(getAllSuitabilitiesByUserId)
 app.register(deleteSuitabilityById)
 app.register(getSuitabilityById)
   
+const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : undefined
 
-app.listen({ port: env.SERVER_PORT }).then(() => {
+app.listen({ port: env.SERVER_PORT, host, }).then(() => {
   console.log('Server is running on port 3333')
   console.log(app.printRoutes());
 })
