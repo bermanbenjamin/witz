@@ -7,6 +7,13 @@
       "dependsOn": ["^build"],
       "env": ["NEXT_PUBLIC_API_HOST"]
     },
+    "build:web": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "build:api": {
+      "outputs": ["dist/**", "public/dist/**"]
+    },
     "dev": {
       "cache": false,
       "persistent": true
