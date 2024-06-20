@@ -4,7 +4,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
-export function Question({ name, questionNumber, alternatives }: QuestionType) {
+export function Question({ name, alternatives }: QuestionType) {
   return (
     <div >
       <h2 className="text-xl font-semibold mb-6">{name}</h2>
