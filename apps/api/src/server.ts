@@ -75,7 +75,9 @@ app.register(fastifyJwt, {
     decode: { complete: true },
   })
   
-app.register(fastifyCors)
+app.register(fastifyCors, {
+  origin: '*',
+})
 
 // Auth
 app.register(authenticateWithPassword)
