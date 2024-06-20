@@ -1,4 +1,3 @@
-
 {
   "extends": "@witz/tsconfig/node.json",
   "compilerOptions": {
@@ -11,5 +10,5 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["src/**/*", "types/**/*.d.ts]
+  "include": ["src/**/*", "types/**/*.d.ts"]
 }
