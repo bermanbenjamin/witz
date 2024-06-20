@@ -2,6 +2,7 @@
   "name": "@witz/api",
   "version": "1.0.0",
   "scripts": {
+    "postinstall": "pnpm env:load prisma generate",
     "build": "tsup src --out-dir dist",
     "start": "pnpm env:load node -r esbuild-register ./src/server.ts",
     "dev": "pnpm env:load tsx watch src/server.ts",

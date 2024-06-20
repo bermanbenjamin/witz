@@ -12,6 +12,7 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "build:api": {
+      "dependsOn": ["^postinstall"],
       "outputs": ["dist/**", "public/dist/**"]
     },
     "dev": {
