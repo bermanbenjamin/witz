@@ -12,19 +12,19 @@ import {
   ZodTypeProvider,
 } from 'fastify-type-provider-zod'
 
-import { errorHandler } from './error-handler'
-import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
-import { getProfile } from './routes/auth/get-profile'
-import { magicLinkLogin } from './routes/auth/magic-link-login'
-import { magicLinkVerify } from './routes/auth/magic-link-verify'
-import { createSuitability } from './routes/suitability/create-suitability'
-import { deleteSuitabilityById } from './routes/suitability/delete-suitability'
-import { getSuitabilityById } from './routes/suitability/get-suitability-by-id'
-import { createUser } from './routes/user/create-user'
-import { deleteUserById } from './routes/user/delete-user-by-id'
-import { getAllSuitabilitiesByUserId } from './routes/user/get-all-user-suitabilities'
-import { getAllUsers } from './routes/user/get-all-users'
-import { updateUserById } from './routes/user/update-user'
+import { errorHandler } from './http/error-handler'
+import { authenticateWithPassword } from './http/routes/auth/authenticate-with-password'
+import { getProfile } from './http/routes/auth/get-profile'
+import { magicLinkLogin } from './http/routes/auth/magic-link-login'
+import { magicLinkVerify } from './http/routes/auth/magic-link-verify'
+import { createSuitability } from './http/routes/suitability/create-suitability'
+import { deleteSuitabilityById } from './http/routes/suitability/delete-suitability'
+import { getSuitabilityById } from './http/routes/suitability/get-suitability-by-id'
+import { createUser } from './http/routes/user/create-user'
+import { deleteUserById } from './http/routes/user/delete-user-by-id'
+import { getAllSuitabilitiesByUserId } from './http/routes/user/get-all-user-suitabilities'
+import { getAllUsers } from './http/routes/user/get-all-users'
+import { updateUserById } from './http/routes/user/update-user'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 

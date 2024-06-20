@@ -1,15 +1,15 @@
+
 {
   "extends": "@witz/tsconfig/node.json",
-  "include": [
-    "src/**/*",
-    "@types/*.d.ts"
-  ],
   "compilerOptions": {
+    "lib": ["ES2015"],
+    "outDir": "./dist",
+    "rootDir": "./src",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
-  }
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*", "types/**/*.d.ts]
 }

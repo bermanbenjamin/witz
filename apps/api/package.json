@@ -2,7 +2,9 @@
   "name": "@witz/api",
   "version": "1.0.0",
   "scripts": {
-    "dev": "pnpm env:load tsx watch src/http/server.ts",
+    "build": "tsup src --out-dir dist",
+    "start": "pnpm env:load node -r esbuild-register ./src/server.ts",
+    "dev": "pnpm env:load tsx watch src/server.ts",
     "prisma:generate": "pnpm env:load prisma generate",
     "prisma:migrate:dev": "pnpm env:load prisma migrate dev",
     "prisma:migrate:deploy": "pnpm env:load prisma migrate deploy",
@@ -25,6 +27,8 @@
     "fastify-plugin": "^4.5.1",
     "fastify-type-provider-zod": "^1.2.0",
     "nodemailer": "^6.9.13",
+    "ts-node": "^10.9.2",
+    "typescript": "^5",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -34,8 +38,10 @@
     "@witz/eslint-config": "workspace:*",
     "@witz/prettier": "workspace:*",
     "@witz/tsconfig": "workspace:*",
-    "dotenv-cli": "^7.4.2",
     "prisma": "^5.14.0",
+    "esbuild": "^0.20.1",
+    "esbuild-register": "^3.5.0",
+    "tsup": "^8.1.0",
     "tsx": "^4.11.0"
   },
   "prisma": {
