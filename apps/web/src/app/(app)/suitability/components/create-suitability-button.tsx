@@ -18,9 +18,9 @@ export default function CreateSuitabilityButton({ suitabilities }: CreateSuitabi
     const year = new Date(suitability.createdAt).getFullYear()
     return year === new Date().getFullYear()
   })
-  
+
   return (
-    <Button onClick={()=>router.push(appRoutes.createSuitability)} className='flex items-center gap-x-2'>
+    <Button onClick={() => router.push(appRoutes.createSuitability)} className='flex items-center gap-x-2'>
       <Icons.update className='w-4 h-4' />
       {hasSuitabilityCurrentYear ? 'Refazer questionário' : 'Responder questionário'}
     </Button>
