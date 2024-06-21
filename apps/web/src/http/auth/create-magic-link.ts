@@ -5,7 +5,7 @@ interface SignInWithMagicLinkRequest {
   name: string
 }
 
-export async function signInWithMagicLink({
+export async function signInWithMagicLinkService({
   email,
   name,
 }: SignInWithMagicLinkRequest) {

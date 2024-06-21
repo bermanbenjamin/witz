@@ -2,12 +2,12 @@
 
 import { HTTPError } from 'ky'
 
-import { verifyMagicLink } from '@/http/auth/verify-magic-link-token'
+import { verifyMagicLinkService } from '@/http/auth/verify-magic-link-token'
 import { setInCookies } from '@/lib/helpers'
 
 export async function signInWithMagicLinkVerifierAction(secret: string) {
   try {
-    const { token } = await verifyMagicLink({
+    const { token } = await verifyMagicLinkService({
       secret,
     })
 

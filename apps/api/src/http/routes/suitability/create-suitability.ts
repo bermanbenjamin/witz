@@ -8,9 +8,6 @@ import { prisma } from '@/lib/prisma'
 import { profileSchema } from '@/models/profile-type'
 import { errorSchema, suitabilitySchema } from '@/schemas/base-schema'
 import { CalculateSuitabilityScore } from '@/service/calculate-score'
-import { getUserPermissions } from '@/utils/get-user-permissions'
-
-import { MethodNotAllowedError } from '../_errors/method-not-allowed-error'
 
 export async function createSuitability(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().register(auth).post(
@@ -21,7 +18,6 @@ export async function createSuitability(app: FastifyInstance) {
         summary: 'Create a suitability answer',
         security: [{ bearerAuth: [] }],
         body: z.object({
-          userId: z.string().min(0),
           questions: z
             .object({
               questionId: z.number(),
@@ -50,16 +46,8 @@ export async function createSuitability(app: FastifyInstance) {
     },
     async (request, reply) => {
       try {
-        const { questions, userId } = request.body
-        const { sub, role } = await request.getCurrentUserProps()
-
-        const { cannot } = getUserPermissions(sub, role)
-
-        if (cannot('create', 'Suitability', userId)) {
-          throw new MethodNotAllowedError(
-            `You're not allowed to create a new Suitability for this user.`,
-          )
-        }
+        const { questions } = request.body
+        const { sub: userId } = await request.getCurrentUserProps()
 
         const userExists = await prisma.user.findFirst({
           where: { id: userId },
@@ -68,7 +56,6 @@ export async function createSuitability(app: FastifyInstance) {
         if (!userExists) {
           return reply.status(404).send({ message: 'User not found' })
         }
-
 
         const score = await CalculateSuitabilityScore(questions)
         let profileType: ProfileType;

@@ -16,7 +16,7 @@ export function Menu() {
         </MenuLink>
       </Can>
       <span className='cursor-not-allowed opacity-80 text-secondary text-sm flex items-center'>
-          Home
+          Inicio
           <Icons.lock className='size-3.5 ml-2' />
         </span>
       {menuItems.map((item) => (

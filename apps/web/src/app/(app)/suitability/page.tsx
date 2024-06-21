@@ -1,26 +1,23 @@
-import { redirect } from 'next/navigation'
-
 import { Icons } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { auth } from '@/lib/auth'
-import { appRoutes, suitabilityInitialText } from '@/lib/constants'
+import { suitabilityInitialText } from '@/lib/constants'
+import { parseProfileType } from '@/lib/utils'
 
+import CreateSuitabilityButton from './components/create-suitability-button'
 import SuitabilityCard from './components/suitability-card'
 
 export default async function SuitabilityPage() {
   const { user } = await auth()
+
   return (
     <section className='w-full'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center space-x-6'>
           <h1 className='font-semibold text-3xl'>Suitability</h1>
-          <Badge variant='custom'>{user.profileType}</Badge>
+          {user.profileType && <Badge variant='custom'>{parseProfileType(user.profileType)}</Badge>}
         </div>
-        <Button onClick={redirect(appRoutes.createSuitability)} className='flex items-center gap-x-2'>
-          <Icons.update className='w-4 h-4' />
-          Responder questionário
-        </Button>
+        <CreateSuitabilityButton suitabilities={user.suitabilities} />
       </div>
 
       <div className='w-full mt-4'>
@@ -33,8 +30,9 @@ export default async function SuitabilityPage() {
           <h1 className='text-xl font-semibold'>Histórico</h1>
         </div>
         <div className='grid grid-cols-5 gap-x-10'>
-          <SuitabilityCard />
-          <SuitabilityCard />
+          {user.suitabilities.map((suitability) => (
+            <SuitabilityCard key={suitability.id} createdAt={suitability.createdAt} />
+          ))}
         </div>
       </div>
     </section>

@@ -6,3 +6,4 @@ export function setInCookies(token: string) {
     maxAge: 60 * 60 * 24 * 7, // 7days
   })
 }
+

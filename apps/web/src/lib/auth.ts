@@ -2,7 +2,7 @@ import { defineAbilityFor } from '@witz/auth'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { getProfile } from '@/http/user/get-profile'
+import { getProfileService } from '@/http/user/get-profile'
 
 import { appRoutes } from './constants'
 
@@ -31,7 +31,7 @@ export async function auth() {
   }
 
   try {
-    const { user } = await getProfile()
+    const { user } = await getProfileService()
 
     return { user }
   } catch {}

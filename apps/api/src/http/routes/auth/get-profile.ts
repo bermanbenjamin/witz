@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { profileSchema } from '@/models/profile-type'
+import { suitabilitySchema } from '@/schemas/base-schema'
 
 import { BadRequestError } from '../_errors/bad-request-error'
 
@@ -27,6 +28,7 @@ export async function getProfile(app: FastifyInstance) {
                 email: z.string().email(),
                 role: z.string(),
                 profileType: profileSchema.nullable(),
+                suitabilities: suitabilitySchema.array(),
               }),
             }),
           },
@@ -42,6 +44,7 @@ export async function getProfile(app: FastifyInstance) {
             email: true,
             role: true,
             profileType: true,
+            suitabilities: true,
           },
           where: {
             id: userId,

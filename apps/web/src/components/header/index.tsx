@@ -8,10 +8,10 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { auth } from '@/lib/auth'
 import { appRoutes, headerItems } from '@/lib/constants'
+import { parseProfileType } from '@/lib/utils'
 
 export async function Header() {
   const { user } = await auth()
-
 
   return (
     <section className="flex w-full items-center justify-between pt-9 pb-6">
@@ -27,7 +27,7 @@ export async function Header() {
         </Link>
         <Icons.slash className="size-3 -rotate-[24deg] text-muted-foreground" />
         <span className='text-sm'>{user.name}</span>
-        <Badge variant='custom' className='text-xs'>{user.profileType}</Badge>
+        {user.profileType && <Badge variant='custom' className='text-xs'>{parseProfileType(user.profileType)}</Badge>}
       </div>
 
       <div className='flex w-full items-center gap-x-8'>

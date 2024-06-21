@@ -3,8 +3,8 @@
 import { HTTPError } from 'ky'
 import { z } from 'zod'
 
-import { signInWithMagicLink } from '@/http/auth/create-magic-link'
-import { signInWithPassword } from '@/http/auth/sign-in-with-password'
+import { signInWithMagicLinkService } from '@/http/auth/create-magic-link'
+import { signInWithPasswordService } from '@/http/auth/sign-in-with-password'
 import { setInCookies } from '@/lib/helpers'
 
 const signInSchema = z.object({
@@ -35,7 +35,7 @@ export async function signInWithEmailAndPassword(data: FormData) {
   const { email, password } = result.data
 
   try {
-    const { token } = await signInWithPassword({
+    const { token } = await signInWithPasswordService({
       email,
       password,
     })
@@ -72,7 +72,7 @@ if (!result.success) {
 const { email, name } = result.data
 
 try {
-  await signInWithMagicLink({
+  await signInWithMagicLinkService({
     email,
     name
   })

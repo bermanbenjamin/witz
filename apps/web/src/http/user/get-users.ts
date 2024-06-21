@@ -11,7 +11,7 @@ interface GetUsersResponse {
   }[]
 }
 
-export async function getUsers() {
+export async function getUsersService() {
   const result = await api.get('users').json<GetUsersResponse>()
 
   return result

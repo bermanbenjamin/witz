@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,9 +7,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { Button } from '@/components/ui/button'
+import { CreateSuitabilityPageProvider, useCreateSuitabilityPageContext } from '@/context/use-create-suitability-page'
 
-import { CheckboxReactHookFormMultiple } from './components/create-suitability-form'
+import { SuitabilityForm } from './components/suitability-form'
 
 interface BreadcrumbItemType {
   name: string
@@ -29,19 +27,8 @@ const breadcrumbItems: BreadcrumbItemType[] = [
   }
 ]
 
-export default function CreateSuitabilityPage() {
-  const [step, setStep] = useState(0)
-
-  function handleStepClick(index: number) {
-    setStep(index)
-  }
-
-  function handleNextStepClick() {
-    if (step !== breadcrumbItems.length - 1) {
-      setStep(step + 1)
-    }
-  }
-
+function CreateSuitabilityPageContent() {
+  const { step, onStepClick, assignTerms } = useCreateSuitabilityPageContext()
 
   return (
     <div className='flex flex-col h-full'>
@@ -50,11 +37,18 @@ export default function CreateSuitabilityPage() {
           {breadcrumbItems.map((item, index) => (
             <span key={index} className='flex items-baseline font-semibold cursor-pointer'>
               {step !== index ? (
-                <BreadcrumbItem onClick={() => handleStepClick(index)}>
+                <BreadcrumbItem onClick={() => {
+                  if (index === 2) {
+                    assignTerms()
+                    return
+                  }
+
+                  onStepClick(index)
+                }}>
                   {item.name}
                 </BreadcrumbItem>
               ) : (
-                <BreadcrumbPage className='text-primary font-bold' onClick={() => handleStepClick(index)}>
+                <BreadcrumbPage className='text-primary font-bold' onClick={() => onStepClick(index)}>
                   {item.name}
                 </BreadcrumbPage>
               )}
@@ -64,12 +58,16 @@ export default function CreateSuitabilityPage() {
         </BreadcrumbList>
       </Breadcrumb>
 
-      <CheckboxReactHookFormMultiple />
-
-
-      {step === breadcrumbItems.length - 1 ?
-        <Button onClick={() => { handleNextStepClick() }} className='self-center'>Finalizar Suitability</Button> :
-        <Button onClick={() => { handleNextStepClick() }} className='self-center'>Próximo passo</Button>}
+      <SuitabilityForm />
     </div>
   )
 }
+
+export default function CreateSuitabilityPage() {
+  return (
+    <CreateSuitabilityPageProvider>
+      <CreateSuitabilityPageContent />
+    </CreateSuitabilityPageProvider>
+  )
+}
+

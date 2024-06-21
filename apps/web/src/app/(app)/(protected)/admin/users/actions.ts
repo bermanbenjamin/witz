@@ -3,11 +3,11 @@
 import { HTTPError } from 'ky'
 import { toast } from 'sonner'
 
-import { getUsers } from '@/http/user/get-users'
+import { getUsersService } from '@/http/user/get-users'
 
 export async function getAllUsers() {
   try {
-    const { users } = await getUsers()
+    const { users } = await getUsersService()
 
     return users
   } catch (err) {

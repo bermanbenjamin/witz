@@ -99,7 +99,7 @@ export const questions: QuestionType[] = [
   },
   {
     questionNumber: 5,
-    name: 'Você possui familiaridade ou já realizou investimentos de algum desses tipos no passado?',
+    name: 'Você possui familiaridade ou já realizou investimentos de algum desses tipos no passado? *Marque todas as opções que se aplicam',
     isMultipleChoices: true,
     alternatives: [
       { alternativeNumber: 1, text: 'Poupança', weight: 0 },
