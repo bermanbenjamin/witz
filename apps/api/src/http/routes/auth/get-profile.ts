@@ -5,8 +5,8 @@ import { z } from 'zod'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { profileSchema } from '@/models/profile-type'
-import { suitabilitySchema } from '@/schemas/base-schema'
 
+import { suitabilitySchema } from '../../../schemas/base-schema'
 import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function getProfile(app: FastifyInstance) {

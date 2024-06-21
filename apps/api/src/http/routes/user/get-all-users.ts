@@ -24,6 +24,8 @@ export async function getAllUsers(app: FastifyInstance){
             }
         },
         async (_, reply) => {
+
+            // ToDo validar si el usuario es admin
             const users = await prisma.user.findMany({
                 select: {
                     id: true,
