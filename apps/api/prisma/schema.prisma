@@ -23,14 +23,17 @@ enum ProfileType {
 
 model User {
   id            String        @id @default(uuid())
-  name          String?
+  name          String
   email         String        @unique
+  phone         String?       @unique
+  cpf           String?       @unique
+  birthDate     DateTime?
   passwordHash  String?       @map("password_hash")
   role          Role          @default(GUEST)
   profileType   ProfileType?
+  suitabilities Suitability[]
   createdAt     DateTime      @default(now()) @map("created_at")
   updatedAt     DateTime      @updatedAt @map("updated_at")
-  suitabilities Suitability[]
 
   @@map("users")
 }

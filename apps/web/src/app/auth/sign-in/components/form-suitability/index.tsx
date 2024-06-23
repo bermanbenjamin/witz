@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label'
 import { useFormSuitability } from './use-form-suitability'
 
 
-const FormSuitability = () => {
+export default function FormSuitability() {
   const { handleSubmit, isPending, errors, success, message } = useFormSuitability()
 
   return (
@@ -76,5 +76,3 @@ const FormSuitability = () => {
     </div>
   )
 }
-
-export default FormSuitability

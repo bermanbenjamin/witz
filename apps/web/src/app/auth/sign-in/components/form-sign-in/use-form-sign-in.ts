@@ -7,7 +7,7 @@ import { appRoutes } from '@/lib/constants'
 
 import { signInWithEmailAndPassword } from '../../actions'
 
-export const useFormSignIn = () => {
+export function useFormSignIn() {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
 

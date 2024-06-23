@@ -5,10 +5,11 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { appRoutes } from '@/lib/constants'
 
 import { useFormSignIn } from './use-form-sign-in'
 
-const FormSignIn = () => {
+export default function FormSignIn() {
   const { handleSubmit, isPending, errors, success, message, showPassword, setShowPassword } = useFormSignIn()
 
   return (
@@ -88,9 +89,7 @@ const FormSignIn = () => {
         )}</Button>
       </form>
 
-      <Button className='w-full mt-6' asChild><Link href="/auth/sign-up">Registrar-se</Link></Button>
+      <Button className='w-full mt-6' asChild><Link href={appRoutes.signUp}>Registrar-se</Link></Button>
     </div>
   )
 }
-
-export default FormSignIn

@@ -4,7 +4,7 @@ import { useFormState } from '@/hooks/use-form-state'
 
 import { signInWithMagicLinkAction } from '../../actions'
 
-export const useFormSuitability = () => {
+export function useFormSuitability() {
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
     signInWithMagicLinkAction,
     () => {

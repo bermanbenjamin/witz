@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import FormSignIn from './components/form-sign-in'
 import FormSuitability from './components/form-suitability'
 
-const SignIn = () => {
+export default function SignInPage() {
   const searchParams = useSearchParams()
 
   const isSuitability = searchParams.get('to') === 'suitability'
@@ -16,5 +16,3 @@ const SignIn = () => {
       </>
   )
 }
-
-export default SignIn

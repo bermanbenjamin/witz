@@ -1,3 +1,4 @@
+import { roleSchema } from '@witz/auth'
 import { hash } from 'bcryptjs'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
@@ -19,20 +20,23 @@ export async function createUser(app: FastifyInstance) {
           name: z.string(),
           email: z.string().email(),
           password: z.string().min(6),
+          cpf: z.string().optional(),
+          phone: z.string().optional(),
+          birthDate: z.date().optional(),
+          role: roleSchema
         }),
       },
     },
     async (request, reply) => {
-      const { name, email, password } = request.body
+      const { name, email, password, birthDate, cpf, phone, role } = request.body
 
-      const userWithSameEmail = await prisma.user.findFirst({
+      const userExists = await prisma.user.findFirst({
         where: {
-          email,
-        },
-      })
+          OR: [{ email }, { cpf }, { phone }],
+        }})
 
-      if (userWithSameEmail) {
-        throw new BadRequestError('Email already in use.')
+      if (userExists) {
+        throw new BadRequestError('Já existe um usuário com esses dados cadastrados.')
       }
 
       const passwordHash = await hash(password, 6)
@@ -42,6 +46,10 @@ export async function createUser(app: FastifyInstance) {
           name,
           email,
           passwordHash,
+          birthDate,
+          cpf,
+          phone,
+          role
         },
       })
       return reply.status(201).send()

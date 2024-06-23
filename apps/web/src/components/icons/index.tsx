@@ -3,6 +3,7 @@ import {
   ArrowDownIcon,
   ArrowUpIcon,
   BadgeCheckIcon,
+  CalendarDaysIcon,
   CheckCheck,
   ChevronsUpDownIcon,
   CloudDownloadIcon,
@@ -43,4 +44,5 @@ export const Icons = {
   doubleCheck: CheckCheck,
   users: UsersIcon,
   home: HomeIcon,
+  calendar: CalendarDaysIcon
 }

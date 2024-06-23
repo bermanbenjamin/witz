@@ -53,6 +53,9 @@ async function seed() {
         name: 'John Doe',
         email: 'john@acme.com',
         role: 'ADMIN',
+        cpf: '12345678900',
+        birthDate: new Date('1990-01-01'),
+        phone: '71912345678',
         passwordHash,
         profileType: 'MODERATE',
         suitabilities: {
@@ -67,6 +70,9 @@ async function seed() {
         name: 'Antonio Carlos',
         email: 'test@test.com',
         role: 'MEMBER',
+        cpf: '12345678901',
+        birthDate: new Date('1990-01-01'),
+        phone: '71912345679',
         passwordHash,
         profileType: 'MODERATE',
         suitabilities: {
@@ -81,6 +87,9 @@ async function seed() {
         name: 'Bellitanner',
         email: 'bahia@bahia.com',
         role: 'GUEST',
+        cpf: '12345678902',
+        birthDate: new Date('1990-01-01'),
+        phone: '71912345670',
         passwordHash,
         profileType: 'MODERATE',
         suitabilities: {
