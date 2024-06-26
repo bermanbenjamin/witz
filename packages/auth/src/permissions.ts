@@ -20,13 +20,17 @@ export const permissions: Record<Role, PermissionsByRole> = {
     can('get', 'Suitability', { userId: {$eq: user.id} }) // Member can read their own Suitability information
     can('create', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
     can('delete', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
+    can('get', 'Wallet', { userId: {$eq: user.id} }) // Member can manage their own Wallet information
+    can('create', 'Wallet', { userId: {$eq: user.id} }) // Member can manage their own Wallet information
   },
   GUEST: (user, { can }) => {
-    can('get', 'User', { id: {$eq: user.id} }) // Member can read their own User information
-    can('update', 'User', { id: {$eq: user.id} }) // Member can read their own User information
-    can('delete', 'User', { id: {$eq: user.id} }) // Member can read their own User information
-    can('get', 'Suitability', { userId: {$eq: user.id} }) // Member can read their own Suitability information
-    can('create', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
-    can('delete', 'Suitability', { userId: {$eq: user.id} }) // Member can manage their own Suitability information
+    can('get', 'User', { id: {$eq: user.id} }) // Guest can read their own User information
+    can('update', 'User', { id: {$eq: user.id} }) // Guest can read their own User information
+    can('delete', 'User', { id: {$eq: user.id} }) // Guest can read their own User information
+    can('get', 'Suitability', { userId: {$eq: user.id} }) // Guest can read their own Suitability information
+    can('create', 'Suitability', { userId: {$eq: user.id} }) // Guest can manage their own Suitability information
+    can('delete', 'Suitability', { userId: {$eq: user.id} }) // Guest can manage their own Suitability information
+    can('get', 'Wallet', { userId: {$eq: user.id} }) // Guest can manage their own Wallet information
+    can('create', 'Wallet', { userId: {$eq: user.id} }) // Guest can manage their own Wallet information
   }
 }

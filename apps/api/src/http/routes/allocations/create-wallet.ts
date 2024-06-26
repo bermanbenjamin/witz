@@ -5,18 +5,18 @@ import { z, ZodError } from 'zod'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { allocationSchema,errorSchema } from '@/schemas/base-schema'
-import { CalculateAllocation } from '@/service/calculate-allocation'
+import { CalculateScore } from '@/service/calculate-allocation'
 import { getUserPermissions } from '@/utils/get-user-permissions'
 
 import { MethodNotAllowedError } from '../_errors/method-not-allowed-error'
 
-export async function createSuitability(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().register(auth).get(
-    '/asset-allocation',
+export async function createWallet(app: FastifyInstance) {
+  app.withTypeProvider<ZodTypeProvider>().register(auth).post(
+    '/wallet',
     {
       schema: {
-        tags: ['Allocation'],
-        summary: 'Get allocation by answers',
+        tags: ['Wallet'],
+        summary: 'Create a wallet based on answers and link the user to an investor type.',
         security: [{ bearerAuth: [] }],
         body: z.object({
           userId: z.string().min(0),
@@ -37,8 +37,8 @@ export async function createSuitability(app: FastifyInstance) {
           400: z.object({ message: z.any() }),
           500: errorSchema
         },
-        description: 'Create a new suitability',
-        required: ['userId', 'questions']
+        description: 'Vinculate user to a investor type',
+        required: ['userId', 'answer']
       },
     },
     async (request, reply) => {
@@ -55,9 +55,9 @@ export async function createSuitability(app: FastifyInstance) {
 
         const { cannot } = getUserPermissions(sub, role)
 
-        if(cannot('create', 'Suitability', userId)){
+        if(cannot('create', 'Wallet', userId)){
           throw new MethodNotAllowedError(
-            `You're not allowed to get a new Suitability for this user.`,
+            `You're not allowed to create a new wallet for this user.`,
           )
         }
 
@@ -69,19 +69,33 @@ export async function createSuitability(app: FastifyInstance) {
           return reply.status(404).send({ message: 'User not found' })
         }
 
-        const allocationPortfolios = await CalculateAllocation(answer)
+        const score = await CalculateScore(answer)
+
+        await prisma.wallet.create({
+          data: {
+            userId,
+            answers: answer,
+            score,
+          },
+          select: {
+            id: true,
+            createdAt: true,
+            score: true,
+            answers: true,
+          }
+        })
 
         userExists.qualifiedInvestor = (answer.investorType === 'IQ');
         userExists.investorProfile = profileMap[answer.investorProfile];
 
-        const updatedUser = await prisma.user.update({
+        await prisma.user.update({
           where: {
-            id: userExists.id,  // ou outro identificador exclusivo do usuário
+            id: userExists.id,
           },
           data: userExists,
         })
 
-        return reply.status(200).send(allocationPortfolios)
+        return reply.status(200)
 
       } catch (error) {
         if (error instanceof ZodError) {

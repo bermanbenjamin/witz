@@ -10,21 +10,26 @@ type Answer = {
   internationalValue: number
 }
 
-export async function CalculateAllocation(answer: Answer): Promise<Portfolio[]> {
+export async function CalculateScore(answer: Answer): Promise<number> {
+  const { totalValue, fiiValue, dailyLiquityValue, internationalValue, imutableValue } = answer;
+  const score = totalValue - fiiValue - dailyLiquityValue - internationalValue - imutableValue;
+  return score;
+}
 
-    const nc = answer.totalValue - answer.fiiValue - answer.dailyLiquityValue - answer.internationalValue - answer.imutableValue
 
-    const allocation = investorAllocations.find(
-      (allocation) => 
-        allocation.investorProfile === answer.investorProfile &&
-        allocation.investorType === answer.investorType &&
-        allocation.minRange <= nc &&
-        (allocation.maxRange == null || allocation.maxRange.valueOf() >= nc)
-    );
+export async function CalculateAllocation(score: number, investorProfile: string, investorType: string): Promise<Portfolio[]> {
 
-    if (!allocation) {
-      throw new Error(`Allocation does not exist`)
-    }
+  const allocation = investorAllocations.find(
+    (allocation) => 
+      allocation.investorProfile === investorProfile &&
+      allocation.investorType === investorType &&
+      allocation.minRange <= score &&
+      (allocation.maxRange == null || allocation.maxRange.valueOf() >= score)
+  );
 
-    return allocation.portfolios
+  if (!allocation) {
+    throw new Error(`Allocation does not exist`)
+  }
+
+  return allocation.portfolios
 }
