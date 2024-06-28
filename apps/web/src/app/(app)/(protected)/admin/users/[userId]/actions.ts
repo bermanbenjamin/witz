@@ -2,13 +2,13 @@
 
 import { HTTPError } from 'ky'
 
-import { getUsersService } from '@/http/user/get-users'
+import { getUserByIdService } from '@/http/user/get-user-by-id'
 
-export async function getAllUsers() {
+export async function getUserById(userId: string) {
   try {
-    const { users } = await getUsersService()
+    const user = await getUserByIdService({ userId })
 
-    return users
+    return user
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json()

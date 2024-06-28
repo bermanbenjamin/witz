@@ -1,3 +1,5 @@
-import { User } from '@prisma/client'
+import type { z } from 'zod'
 
-export interface UserDTO extends User {}
+import type { userSchema } from '@/schemas/base-schema'
+
+export type UserDTO = z.infer<typeof userSchema>

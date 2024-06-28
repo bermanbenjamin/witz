@@ -3,10 +3,10 @@ import { Icons } from '@/components/icons'
 import type { NavItemProps } from './types'
 
 export const appRoutes = {
+  home: '/',
   signIn: '/auth/sign-in',
   signUp: '/auth/sign-up',
   magicLink: '/auth/magic-link',
-  home: '/home',
   settings: '/settings',
   suitability: '/suitability',
   createSuitability: '/suitability/create',

@@ -1,5 +1,6 @@
 
 import type { Row } from '@tanstack/react-table'
+import Link from 'next/link'
 
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
@@ -10,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { appRoutes } from '@/lib/constants'
 
 import type { UserTableColumn } from './columns'
 
@@ -34,7 +36,11 @@ export default function UsersTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem className='cursor-pointer'>Edit {userProps.name}</DropdownMenuItem>
+        <DropdownMenuItem className='cursor-pointer' asChild>
+          <Link href={`${appRoutes.admin.users}/${userProps.id}`}>
+            Ver Detalhes
+          </Link>
+          </DropdownMenuItem>
         <DropdownMenuItem className='cursor-pointer'>Atualizar Fee</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSeparator />

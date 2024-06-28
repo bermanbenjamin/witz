@@ -15,16 +15,18 @@ export async function createUser(app: FastifyInstance) {
       schema: {
         tags: ['User'],
         summary: 'Create a new user',
-        security: [{ bearerAuth: [] }],
         body: z.object({
           name: z.string(),
           email: z.string().email(),
           password: z.string().min(6),
           cpf: z.string().optional(),
           phone: z.string().optional(),
-          birthDate: z.date().optional(),
+          birthDate: z.string().optional(),
           role: roleSchema
         }),
+        response: {
+          201: z.void(),
+        },
       },
     },
     async (request, reply) => {
@@ -52,6 +54,7 @@ export async function createUser(app: FastifyInstance) {
           role
         },
       })
+
       return reply.status(201).send()
     },
   )

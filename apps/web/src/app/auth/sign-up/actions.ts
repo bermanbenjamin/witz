@@ -1,28 +1,12 @@
 'use server'
 
+import { format } from 'date-fns'
 import { HTTPError } from 'ky'
 import { z } from 'zod'
 
 import { signUpService } from '@/http/auth/sign-up'
 
-export const signUpSchema = z
-  .object({
-    email: z
-      .string()
-      .email({ message: 'Por favor, informe seu endereço de e-mail.' }),
-    name: z.string().refine((value) => value.split(' ').length > 1, {
-      message: 'Por favor, informe seu nome completo.',
-    }),
-    password: z.string().min(6, { message: 'Senha deve conter ao menos 6 caracteres' }),
-    password_confirmation: z.string(),
-    cpf: z.string({ message: 'Por favor, informe seu CPF.' }),
-    phone: z.string({ message: 'Por favor, informe seu telefone.' }),
-    birthDate: z.date({ required_error: 'Por favor, informe sua data de nascimento.' }),
-  })
-  .refine((data) => data.password === data.password_confirmation, {
-    message: 'As senhas não coincidem.',
-    path: ['password_confirmation'],
-  })
+import type { signUpSchema } from './components/form-sign-up/use-form-sign-up'
 
 export async function signUpAction(data: z.infer<typeof signUpSchema>) {
   const { name, email, password, cpf, birthDate, phone } = data
@@ -33,7 +17,7 @@ export async function signUpAction(data: z.infer<typeof signUpSchema>) {
       email,
       password,
       cpf,
-      birthDate: new Date(birthDate),
+      birthDate: format(birthDate, "dd/MM/yyyy"),
       phone,
       role: 'MEMBER'
     })

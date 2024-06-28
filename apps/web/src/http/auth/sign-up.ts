@@ -8,7 +8,7 @@ interface SignUpRequest {
   password: string
   cpf: string
   phone: string
-  birthDate: Date
+  birthDate: string
   role: Role
 }
 

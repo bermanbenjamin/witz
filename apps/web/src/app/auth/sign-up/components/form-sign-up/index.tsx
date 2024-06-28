@@ -135,6 +135,7 @@ export default function FormSignUp() {
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
+                      type='button'
                       className={cn(
                         "pl-3 text-left font-normal bg-card hover:bg-card text-white",
                         !field.value && "text-muted-foreground"
@@ -229,11 +230,13 @@ export default function FormSignUp() {
         />
       </section>
 
-        <Button variant='secondary' type="submit" className='w-full mt-4' disabled={isPending}>{isPending ? (
-          <Icons.loader className="size-4 animate-spin" />
-        ) : (
-          'Acessar'
-        )}</Button>
+        <Button variant='secondary' type="submit" className='w-full mt-4' disabled={isPending}>
+          {isPending ? (
+            <Icons.loader className="size-4 animate-spin" />
+          ) : (
+            'Acessar'
+          )}
+        </Button>
       </form>
     </Form>
 

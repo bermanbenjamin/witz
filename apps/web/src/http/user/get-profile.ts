@@ -10,6 +10,9 @@ interface GetProfileResponse {
     name: string | null
     email: string
     role: Role
+    phone: string
+    cpf: string
+    birthDate: string
     profileType: ProfileType
     suitabilities: SuitabilityDTO[]
   }

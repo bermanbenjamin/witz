@@ -5,6 +5,7 @@ import {
   BadgeCheckIcon,
   CalendarDaysIcon,
   CheckCheck,
+  ChevronLeftIcon,
   ChevronsUpDownIcon,
   CloudDownloadIcon,
   EditIcon,
@@ -15,11 +16,11 @@ import {
   HomeIcon,
   LoaderIcon,
   LockIcon,
-  type LucideIcon,
   Settings2Icon,
   SlashIcon,
   Trash2Icon,
   UsersIcon,
+  type LucideIcon,
 } from 'lucide-react'
 
 export type IconType = LucideIcon
@@ -44,5 +45,6 @@ export const Icons = {
   doubleCheck: CheckCheck,
   users: UsersIcon,
   home: HomeIcon,
-  calendar: CalendarDaysIcon
+  calendar: CalendarDaysIcon,
+  arrowBack: ChevronLeftIcon
 }

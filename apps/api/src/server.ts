@@ -24,6 +24,7 @@ import { createUser } from './http/routes/user/create-user'
 import { deleteUserById } from './http/routes/user/delete-user-by-id'
 import { getAllSuitabilitiesByUserId } from './http/routes/user/get-all-user-suitabilities'
 import { getAllUsers } from './http/routes/user/get-all-users'
+import { getUserById } from './http/routes/user/get-user-by-id'
 import { updateUserById } from './http/routes/user/update-user'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
@@ -88,6 +89,7 @@ app.register(magicLinkVerify)
 // User
 app.register(createUser)
 app.register(getAllUsers)
+app.register(getUserById)
 app.register(deleteUserById)
 app.register(updateUserById)
 

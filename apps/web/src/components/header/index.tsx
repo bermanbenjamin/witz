@@ -16,7 +16,7 @@ export async function Header() {
   return (
     <section className="flex w-full items-center justify-between pt-9 pb-6">
       <div className='flex items-center space-x-3 w-full'>
-        <Link href={appRoutes.suitability}>
+        <Link href={appRoutes.home}>
           <Image
             src={logoWhite}
             alt="logo-white"

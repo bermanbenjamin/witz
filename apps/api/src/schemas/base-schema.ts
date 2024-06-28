@@ -1,18 +1,25 @@
 import { z } from 'zod'
 
-export const userSchema = z.object({
-  id: z.string(),
-  name: z.string().nullable(),
-  email: z.string().email(),
-  role: z.string(),
-  createdAt: z.date(),
-})
+import { profileSchema } from '@/models/profile-type'
 
 export const suitabilitySchema = z.object({
   id: z.string(),
   createdAt: z.date(),
   score: z.number(),
-});
+})
+
+export const userSchema = z.object({
+  id: z.string(),
+  name: z.string().nullable(),
+  email: z.string().email(),
+  phone: z.string().nullable(),
+  cpf: z.string().nullable(),
+  birthDate: z.string().nullable(),
+  profileType: profileSchema,
+  suitabilities: suitabilitySchema.array(),
+  role: z.string(),
+  createdAt: z.date(),
+})
 
 export const answerSchema = z.object({
   id: z.string(),
