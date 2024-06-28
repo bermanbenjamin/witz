@@ -30,7 +30,7 @@ export default async function SuitabilityPage() {
           <h1 className='text-xl font-semibold'>Histórico</h1>
         </div>
         <div className='grid grid-cols-5 gap-x-10'>
-          {user.suitabilities.length < 1 && (<span className='text-muted-foreground font-semibold'>Sem histórico suitability ainda.</span>)}
+          {user.suitabilities === undefined || user.suitabilities.length === 0 && (<span className='text-muted-foreground font-semibold'>Sem histórico suitability ainda.</span>)}
           {user.suitabilities.length > 0 && user.suitabilities.map((suitability) => (
             <SuitabilityCard key={suitability.id} createdAt={suitability.createdAt} />
           ))}
