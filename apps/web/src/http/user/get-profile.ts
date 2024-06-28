@@ -1,8 +1,13 @@
 import type { ProfileType } from '@witz/api/src/models/profile-type'
-import type { SuitabilityDTO } from '@witz/api/src/models/suitability'
 import type { Role } from '@witz/auth'
 
 import { api } from '../api-client'
+
+interface SuitabilityDTO {
+    id: string,
+    createdAt: Date,
+    score: number,
+}
 
 interface GetProfileResponse {
   user: {

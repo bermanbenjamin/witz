@@ -216,8 +216,8 @@ export const questions: QuestionType[] = [
   },
   {
     questionNumber: 11,
-    name: 'Selecione quais ativos que compõem seu patrimônio total atual',
-    isMultipleChoices: false,
+    name: 'Selecione quais ativos que compõem seu patrimônio total atual ?',
+    isMultipleChoices: true,
     alternatives: [
       { alternativeNumber: 1, text: 'Poupança', weight: 0 },
       {

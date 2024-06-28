@@ -1,3 +1,5 @@
+
+
 import { Icons } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { auth } from '@/lib/auth'
@@ -6,6 +8,8 @@ import { parseProfileType } from '@/lib/utils'
 
 import CreateSuitabilityButton from './components/create-suitability-button'
 import SuitabilityCard from './components/suitability-card'
+
+
 
 export default async function SuitabilityPage() {
   const { user } = await auth()
@@ -30,7 +34,7 @@ export default async function SuitabilityPage() {
           <h1 className='text-xl font-semibold'>Histórico</h1>
         </div>
         <div className='grid grid-cols-5 gap-x-10'>
-          {user.suitabilities.length < 1 && (<span className='text-muted-foreground font-semibold'>Sem histórico suitability ainda.</span>)}
+          {user.suitabilities === undefined || user.suitabilities.length === 0 && (<span className='text-muted-foreground font-semibold'>Sem histórico suitability ainda.</span>)}
           {user.suitabilities.length > 0 && user.suitabilities.map((suitability) => (
             <SuitabilityCard key={suitability.id} createdAt={suitability.createdAt} />
           ))}
