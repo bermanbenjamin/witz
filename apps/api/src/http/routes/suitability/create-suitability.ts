@@ -72,7 +72,47 @@ export async function createSuitability(app: FastifyInstance) {
           profileType = ProfileType.SUPER_AGRESSIVE;
         }
 
+        const startOfYear = new Date(new Date().getFullYear(), 0, 1); 
+        const startOfNextYear = new Date(new Date().getFullYear() + 1, 0, 1); 
+
+        const hasSuitabilityOnCurrentYear = await prisma.suitability.findFirst(
+          {
+            where: {
+              createdAt: {
+                gte: startOfYear,
+                lt: startOfNextYear
+              }
+            }
+          }
+        )
+
         const [suitability, updatedUser] = await prisma.$transaction([
+          
+          hasSuitabilityOnCurrentYear ?
+          prisma.suitability.update({
+            where: {
+              id: hasSuitabilityOnCurrentYear.id,
+            },
+            data: {
+              userId,
+              answers: {
+                createMany: {
+                  data: questions.map((question) => ({
+                    questionId: question.questionId,
+                    choosedAlternativesId: question.choosedAlternativesId,
+                  })),
+                },
+              },
+              score,
+            },
+            select: {
+              id: true,
+              createdAt: true,
+              score: true,
+              answers: true,
+            }
+          })
+          :
           prisma.suitability.create({
             data: {
               userId,
@@ -93,6 +133,7 @@ export async function createSuitability(app: FastifyInstance) {
               answers: true,
             }
           }),
+
 
           prisma.user.update({
             where: {
