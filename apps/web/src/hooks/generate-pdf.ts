@@ -12,7 +12,7 @@ export const generatePDF = async (text: string) => {
 
   // Draw a string of text diagonally across the first page
   page.drawText(text, {
-    x: 50,
+    x: width - 200,
     y: height - 50,
     size: 30,
     color: rgb(0, 0, 0),
