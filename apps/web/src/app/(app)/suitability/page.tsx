@@ -1,3 +1,5 @@
+
+
 import { Icons } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { auth } from '@/lib/auth'
@@ -6,6 +8,8 @@ import { parseProfileType } from '@/lib/utils'
 
 import CreateSuitabilityButton from './components/create-suitability-button'
 import SuitabilityCard from './components/suitability-card'
+
+
 
 export default async function SuitabilityPage() {
   const { user } = await auth()
