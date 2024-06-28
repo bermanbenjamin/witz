@@ -1,5 +1,3 @@
-
-
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
@@ -19,11 +17,11 @@ interface UserDetailPageProps {
 export default async function UserDetailPage({ params }: UserDetailPageProps) {
   const userProps = await getUserById(params.userId)
 
-  if(!userProps) redirect(appRoutes.admin.users)
+  if (!userProps) redirect(appRoutes.admin.users)
 
   return (
     <div>
-      <Button variant="link" asChild className='text-white p-0'>
+      <Button variant="link" asChild className="text-white p-0">
         <Link href={appRoutes.admin.users}>
           <Icons.arrowBack className="h-4 w-4 mr-2" />
           Voltar

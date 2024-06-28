@@ -13,29 +13,30 @@ export const metadata: Metadata = {
     default: 'Witz',
     template: '%s | Witz',
   },
-  description: "Livres de qualquer amarra com instituições financeiras ou comissões por ativos específicos.",
+  description:
+    'Livres de qualquer amarra com instituições financeiras ou comissões por ativos específicos.',
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
-    apple: '/favicon.svg'
-  }
-};
+    apple: '/favicon.svg',
+  },
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(
-            'min-h-screen bg-background font-sans antialiased dark',
-            inter.className
-          )}>
-          <AppProviders>
-          {children}
-        </AppProviders>
-        </body>
+      <body
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased dark',
+          inter.className,
+        )}
+      >
+        <AppProviders>{children}</AppProviders>
+      </body>
     </html>
-  );
+  )
 }

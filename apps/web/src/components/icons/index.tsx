@@ -16,11 +16,11 @@ import {
   HomeIcon,
   LoaderIcon,
   LockIcon,
+  type LucideIcon,
   Settings2Icon,
   SlashIcon,
   Trash2Icon,
   UsersIcon,
-  type LucideIcon,
 } from 'lucide-react'
 
 export type IconType = LucideIcon
@@ -46,5 +46,5 @@ export const Icons = {
   users: UsersIcon,
   home: HomeIcon,
   calendar: CalendarDaysIcon,
-  arrowBack: ChevronLeftIcon
+  arrowBack: ChevronLeftIcon,
 }

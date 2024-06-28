@@ -68,6 +68,5 @@
     "extends": [
       "@witz/eslint-config/next"
     ]
-  },
-  "prettier": "@witz/prettier"
+  }
 }

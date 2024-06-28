@@ -9,15 +9,13 @@ interface SuitabilityCardProps {
 export default function SuitabilityCard({ createdAt }: SuitabilityCardProps) {
   const year = new Date(createdAt).getFullYear()
 
-
   const handleDownload = async () => {
-    const pdfUrl = await generatePDF("Gerar modelo");
-    const link = document.createElement('a');
-    link.href = pdfUrl;
-    link.download = `witz_wealth_suitability_${year}.pdf`;
-    link.click();
-  };
-
+    const pdfUrl = await generatePDF('Gerar modelo')
+    const link = document.createElement('a')
+    link.href = pdfUrl
+    link.download = `witz_wealth_suitability_${year}.pdf`
+    link.click()
+  }
 
   return (
     <button onClick={handleDownload}>

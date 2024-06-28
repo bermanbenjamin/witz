@@ -14,14 +14,15 @@ export default async function UsersPage() {
 
   return (
     <div className="w-full">
-      <Suspense 
+      <Suspense
         fallback={
-        <div className='flex items-center space-x-2'>
-          <Icons.loader className='animate-spin size-3.5' />
-          Carregando...
+          <div className="flex items-center space-x-2">
+            <Icons.loader className="animate-spin size-3.5" />
+            Carregando...
           </div>
-        }>
-      <UsersTable users={users} />
+        }
+      >
+        <UsersTable users={users} />
       </Suspense>
     </div>
   )

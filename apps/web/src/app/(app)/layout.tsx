@@ -6,7 +6,11 @@ import { auth, isAuthenticated } from '@/lib/auth'
 import { appRoutes } from '@/lib/constants'
 import { AbilityProvider } from '@/providers/ability-provider'
 
-export default async function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const { user } = await auth()
 
   if (!isAuthenticated()) {
@@ -15,11 +19,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <AbilityProvider user={user}>
-    <main className="mx-auto h-screen w-full max-w-[1440px] px-8">
-      <Header />
-      <Menu />
-      <section className="py-6">{children}</section>
-    </main>
+      <main className="mx-auto h-screen w-full max-w-[1440px] px-8">
+        <Header />
+        <Menu />
+        <section className="py-6">{children}</section>
+      </main>
     </AbilityProvider>
   )
 }

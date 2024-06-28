@@ -15,24 +15,23 @@ export interface UserTableColumn {
 
 export const columns: ColumnDef<UserTableColumn>[] = [
   {
-    accessorKey: "name",
+    accessorKey: 'name',
     header: ({ column }) => (
       <UsersTableColumnHeader column={column} title="Nome" />
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: 'email',
     header: 'Email',
-    
   },
   {
-    accessorKey: "role",
+    accessorKey: 'role',
     header: ({ column }) => (
       <UsersTableColumnHeader column={column} title="Nível de acesso" />
     ),
   },
   {
-    id: "actions",
-    cell: ({ row }) => <UsersTableRowActions row={row} />
+    id: 'actions',
+    cell: ({ row }) => <UsersTableRowActions row={row} />,
   },
 ]

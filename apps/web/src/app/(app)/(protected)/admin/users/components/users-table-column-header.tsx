@@ -27,7 +27,7 @@ export default function UsersTableColumnHeader<TData, TValue>({
   }
 
   return (
-    <div className={cn("flex items-center space-x-2", className)}>
+    <div className={cn('flex items-center space-x-2', className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -36,9 +36,9 @@ export default function UsersTableColumnHeader<TData, TValue>({
             className="-ml-3 h-8 data-[state=open]:bg-accent"
           >
             <span>{title}</span>
-            {column.getIsSorted() === "desc" ? (
+            {column.getIsSorted() === 'desc' ? (
               <Icons.arrowDown className="ml-2 size-4" />
-            ) : column.getIsSorted() === "asc" ? (
+            ) : column.getIsSorted() === 'asc' ? (
               <Icons.arrowUp className="ml-2 size-4" />
             ) : (
               <Icons.chevronArrowUpDown className="ml-2 size-4" />
