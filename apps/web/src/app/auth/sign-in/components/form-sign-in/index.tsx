@@ -90,6 +90,11 @@ export default function FormSignIn() {
       </form>
 
       <Button className='w-full mt-6' asChild><Link href={appRoutes.signUp}>Registrar-se</Link></Button>
+      <Button className='w-full mt-6 text-white' variant='link' asChild>
+        <Link href={`${appRoutes.signIn}?to=suitability`}>
+          Acessar modo convidado
+        </Link>
+      </Button>
     </div>
   )
 }

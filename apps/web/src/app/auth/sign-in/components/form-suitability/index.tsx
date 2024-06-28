@@ -1,8 +1,11 @@
+import Link from 'next/link'
+
 import { Icons } from '@/components/icons'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { appRoutes } from '@/lib/constants'
 
 import { useFormSuitability } from './use-form-suitability'
 
@@ -64,6 +67,11 @@ export default function FormSuitability() {
           'Avançar'
         )}</Button>
         </form>
+        <Button className='w-full mt-6 text-white' variant='link' asChild>
+          <Link href={appRoutes.signIn}>
+            Acessar modo membro
+          </Link>
+      </Button>
         {success === true && (
           <Alert variant="success">
             <Icons.doubleCheck className="size-4" />
