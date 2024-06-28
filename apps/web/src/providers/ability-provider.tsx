@@ -6,11 +6,11 @@ import { createContext, type ReactNode } from 'react'
 
 interface Props {
   user: {
-    id: string;
-    name: string | null;
-    email: string;
+    id: string
+    name: string | null
+    email: string
     role: Role
-}
+  }
   children: ReactNode
 }
 
@@ -22,12 +22,12 @@ export const Can = createContextualCan(AbilityContext.Consumer)
 
 const AbilityProvider = ({ user, children }: Props) => {
   const permissions = defineAbilityFor({ id: user.id, role: user.role })
-  
-  return <AbilityContext.Provider value={permissions}>{children}</AbilityContext.Provider>
+
+  return (
+    <AbilityContext.Provider value={permissions}>
+      {children}
+    </AbilityContext.Provider>
+  )
 }
 
 export { AbilityProvider }
-
-
-
-

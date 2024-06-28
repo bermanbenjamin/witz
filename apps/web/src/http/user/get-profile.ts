@@ -4,9 +4,9 @@ import type { Role } from '@witz/auth'
 import { api } from '../api-client'
 
 interface SuitabilityDTO {
-    id: string,
-    createdAt: Date,
-    score: number,
+  id: string
+  createdAt: Date
+  score: number
 }
 
 interface GetProfileResponse {

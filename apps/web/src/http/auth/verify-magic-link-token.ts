@@ -8,7 +8,9 @@ interface VerifyMagicLinkResponse {
   token: string
 }
 
-export async function verifyMagicLinkService({ secret }: VerifyMagicLinkRequest) {
+export async function verifyMagicLinkService({
+  secret,
+}: VerifyMagicLinkRequest) {
   const result = await api
     .post('auth/magic-link/verify', {
       json: {

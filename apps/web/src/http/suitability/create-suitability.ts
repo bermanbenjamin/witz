@@ -1,4 +1,3 @@
-
 import { api } from '../api-client'
 
 export interface CreateSuitabilityRequest {
@@ -8,11 +7,12 @@ export interface CreateSuitabilityRequest {
   }[]
 }
 
-
-export async function createSuitabilityService({ questions }: CreateSuitabilityRequest) {
+export async function createSuitabilityService({
+  questions,
+}: CreateSuitabilityRequest) {
   const result = await api.post('suitabilities', {
     json: {
-      questions
+      questions,
     },
   })
 

@@ -15,7 +15,7 @@ export async function Header() {
 
   return (
     <section className="flex w-full items-center justify-between pt-9 pb-6">
-      <div className='flex items-center space-x-3 w-full'>
+      <div className="flex items-center space-x-3 w-full">
         <Link href={appRoutes.home}>
           <Image
             src={logoWhite}
@@ -26,19 +26,29 @@ export async function Header() {
           />
         </Link>
         <Icons.slash className="size-3 -rotate-[24deg] text-muted-foreground" />
-        <span className='text-sm'>{user.name}</span>
-        {user.profileType && <Badge variant='custom' className='text-xs'>{parseProfileType(user.profileType)}</Badge>}
+        <span className="text-sm">{user.name}</span>
+        {user.profileType && (
+          <Badge variant="custom" className="text-xs">
+            {parseProfileType(user.profileType)}
+          </Badge>
+        )}
       </div>
 
-      <div className='flex w-full items-center gap-x-8'>
-        <div className='flex w-full items-center gap-x-2 justify-end'>
-          {headerItems.map((item) => <Link href={item.path} key={item.path}>{item.name}</Link>)}
+      <div className="flex w-full items-center gap-x-8">
+        <div className="flex w-full items-center gap-x-2 justify-end">
+          {headerItems.map((item) => (
+            <Link href={item.path} key={item.path}>
+              {item.name}
+            </Link>
+          ))}
         </div>
-        {user.role === 'GUEST' ?
-          <Button><Link href={appRoutes.signUp}>Finalizar cadastro</Link></Button> : null}
+        {user.role === 'GUEST' ? (
+          <Button>
+            <Link href={appRoutes.signUp}>Finalizar cadastro</Link>
+          </Button>
+        ) : null}
         <ProfileButton />
       </div>
-
     </section>
   )
 }

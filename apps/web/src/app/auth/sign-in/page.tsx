@@ -10,9 +10,5 @@ export default function SignInPage() {
 
   const isSuitability = searchParams.get('to') === 'suitability'
 
-  return (
-    <>
-      {isSuitability ? <FormSuitability />: <FormSignIn />}
-      </>
-  )
+  return <>{isSuitability ? <FormSuitability /> : <FormSignIn />}</>
 }

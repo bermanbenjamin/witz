@@ -33,7 +33,7 @@ export async function ProfileButton() {
         <ChevronDown className="size-4 text-muted-foreground" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem asChild className='cursor-pointer'>
+        <DropdownMenuItem asChild className="cursor-pointer">
           <a href="/api/auth/sign-out">
             <LogOut className="mr-2 size-4" />
             Sair

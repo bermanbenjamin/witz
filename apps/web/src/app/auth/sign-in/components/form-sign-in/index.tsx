@@ -10,10 +10,18 @@ import { appRoutes } from '@/lib/constants'
 import { useFormSignIn } from './use-form-sign-in'
 
 export default function FormSignIn() {
-  const { handleSubmit, isPending, errors, success, message, showPassword, setShowPassword } = useFormSignIn()
+  const {
+    handleSubmit,
+    isPending,
+    errors,
+    success,
+    message,
+    showPassword,
+    setShowPassword,
+  } = useFormSignIn()
 
   return (
-    <div className='max-w-80 w-full'>
+    <div className="max-w-80 w-full">
       <div className="space-y-2 text-center">
         <h1 className="text-xl font-semibold">Acessar Carteira</h1>
         <span>Insira suas informações para avançar</span>
@@ -37,7 +45,9 @@ export default function FormSignIn() {
           <Label htmlFor="email">Email</Label>
           <Input
             placeholder="email@gmail.com"
-            name="email" type="email" id="email"
+            name="email"
+            type="email"
+            id="email"
           />
           {errors?.email && (
             <p className="text-xs font-medium text-red-500 dark:text-red-400">
@@ -82,15 +92,24 @@ export default function FormSignIn() {
           Esqueceu sua senha?
         </Link>
 
-        <Button variant='secondary' type="submit" className='w-full mt-4' disabled={isPending}>{isPending ? (
-          <Icons.loader className="size-4 animate-spin" />
-        ) : (
-          'Acessar'
-        )}</Button>
+        <Button
+          variant="secondary"
+          type="submit"
+          className="w-full mt-4"
+          disabled={isPending}
+        >
+          {isPending ? (
+            <Icons.loader className="size-4 animate-spin" />
+          ) : (
+            'Acessar'
+          )}
+        </Button>
       </form>
 
-      <Button className='w-full mt-6' asChild><Link href={appRoutes.signUp}>Registrar-se</Link></Button>
-      <Button className='w-full mt-6 text-white' variant='link' asChild>
+      <Button className="w-full mt-6" asChild>
+        <Link href={appRoutes.signUp}>Registrar-se</Link>
+      </Button>
+      <Button className="w-full mt-6 text-white" variant="link" asChild>
         <Link href={`${appRoutes.signIn}?to=suitability`}>
           Acessar modo convidado
         </Link>

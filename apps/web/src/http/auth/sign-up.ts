@@ -21,7 +21,7 @@ export async function signUpService({
   birthDate,
   cpf,
   phone,
-  role
+  role,
 }: SignUpRequest): Promise<SignUpResponse> {
   await api.post('users', {
     json: {
@@ -31,7 +31,7 @@ export async function signUpService({
       birthDate,
       cpf,
       phone,
-      role
+      role,
     },
   })
 }

@@ -11,16 +11,14 @@ interface VerifyMagiclinkProps {
 }
 
 export default function VerifyMagiclink({ secret }: VerifyMagiclinkProps) {
-
   const { data, isLoading } = useQuery({
     queryKey: ['verify-magic-link'],
-    queryFn: async () =>
-      await signInWithMagicLinkVerifierAction(secret),
+    queryFn: async () => await signInWithMagicLinkVerifierAction(secret),
   })
 
   if (isLoading) {
     return (
-      <div className='flex items-center gap-x-2'>
+      <div className="flex items-center gap-x-2">
         <Icons.loader className="animate-spin" />
         <h1 className="text-lg">Verificando token de login...</h1>
       </div>

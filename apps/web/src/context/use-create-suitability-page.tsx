@@ -3,12 +3,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
-import { createContext, type ReactNode,useContext, useState } from 'react'
+import { createContext, type ReactNode, useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { type CreateSuitabilityRequest,createSuitabilityService } from '@/http/suitability/create-suitability'
+import {
+  type CreateSuitabilityRequest,
+  createSuitabilityService,
+} from '@/http/suitability/create-suitability'
 import { appRoutes } from '@/lib/constants'
 
 interface CreateSuitabilityPageProviderProps {
@@ -27,18 +30,20 @@ interface CreateSuitabilityPageContextProps {
   onSubmit: (values: CreateSuitabilityFormValues) => void
   isCheckedTerms: boolean
   onCheckTerms: () => void
-  isPending: boolean,
+  isPending: boolean
   assignTerms: () => void
 }
-  
+
 const CreateSuitabilityPageContext =
   createContext<CreateSuitabilityPageContextProps>(
     {} as CreateSuitabilityPageContextProps,
   )
 
-export function CreateSuitabilityPageProvider({ children }: CreateSuitabilityPageProviderProps) {
+export function CreateSuitabilityPageProvider({
+  children,
+}: CreateSuitabilityPageProviderProps) {
   const router = useRouter()
-  
+
   const form = useForm<CreateSuitabilityFormValues>({
     resolver: zodResolver(formSchema),
   })
@@ -48,7 +53,8 @@ export function CreateSuitabilityPageProvider({ children }: CreateSuitabilityPag
 
   const { mutate: createSuitability, isPending } = useMutation({
     mutationKey: ['createSuitability'],
-    mutationFn: async (questions: CreateSuitabilityRequest) => await createSuitabilityService(questions),
+    mutationFn: async (questions: CreateSuitabilityRequest) =>
+      await createSuitabilityService(questions),
     onSuccess: () => {
       toast.success('Suitability criado com sucesso!')
       router.push(appRoutes.suitability)
@@ -61,10 +67,12 @@ export function CreateSuitabilityPageProvider({ children }: CreateSuitabilityPag
       return
     }
 
-    const parsedValues = Object.entries(values).map(([, choosedAlternativesId], index) => ({
-      questionId: index + 1,
-      choosedAlternativesId,
-    }))
+    const parsedValues = Object.entries(values).map(
+      ([, choosedAlternativesId], index) => ({
+        questionId: index + 1,
+        choosedAlternativesId,
+      }),
+    )
 
     createSuitability({ questions: parsedValues })
   }
@@ -78,11 +86,13 @@ export function CreateSuitabilityPageProvider({ children }: CreateSuitabilityPag
   }
 
   function onNextStepClick() {
-    setStep((prev) => prev+1)
+    setStep((prev) => prev + 1)
   }
 
   function assignTerms() {
-    for (const [, value] of Object.entries(form.getValues()) as Array<[string, number[]]>) {
+    for (const [, value] of Object.entries(form.getValues()) as Array<
+      [string, number[]]
+    >) {
       if (value.length === 0) {
         toast.error(`Por favor, responda todas as perguntas para continuar.`)
         return
@@ -91,19 +101,21 @@ export function CreateSuitabilityPageProvider({ children }: CreateSuitabilityPag
 
     onNextStepClick()
   }
-  
+
   return (
-    <CreateSuitabilityPageContext.Provider 
-    value={{step, 
-      onStepClick,
-      onNextStepClick,
-      form,
-      onSubmit,
-      isCheckedTerms,
-      onCheckTerms,
-      isPending,
-      assignTerms
-      }}>
+    <CreateSuitabilityPageContext.Provider
+      value={{
+        step,
+        onStepClick,
+        onNextStepClick,
+        form,
+        onSubmit,
+        isCheckedTerms,
+        onCheckTerms,
+        isPending,
+        assignTerms,
+      }}
+    >
       {children}
     </CreateSuitabilityPageContext.Provider>
   )
@@ -113,7 +125,9 @@ export function useCreateSuitabilityPageContext() {
   const context = useContext(CreateSuitabilityPageContext)
 
   if (!context) {
-    throw new Error('useCreateSuitabilityPageContext must be used within a CreateSuitabilityPageProvider')
+    throw new Error(
+      'useCreateSuitabilityPageContext must be used within a CreateSuitabilityPageProvider',
+    )
   }
 
   return context

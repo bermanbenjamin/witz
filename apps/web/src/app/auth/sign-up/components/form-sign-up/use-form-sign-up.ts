@@ -19,11 +19,19 @@ export const signUpSchema = z
     name: z.string().refine((value) => value.split(' ').length > 1, {
       message: 'Por favor, informe seu nome completo.',
     }),
-    password: z.string({ required_error: 'Senha é obrigatória' }).min(6, { message: 'Senha deve conter ao menos 6 caracteres' }),
-    password_confirmation: z.string({ required_error: 'Senha é obrigatória' }).min(6, { message: 'Senha deve conter ao menos 6 caracteres' }),
+    password: z
+      .string({ required_error: 'Senha é obrigatória' })
+      .min(6, { message: 'Senha deve conter ao menos 6 caracteres' }),
+    password_confirmation: z
+      .string({ required_error: 'Senha é obrigatória' })
+      .min(6, { message: 'Senha deve conter ao menos 6 caracteres' }),
     cpf: z.string({ message: 'Por favor, informe seu CPF.' }),
-    phone: z.string({ message: 'Por favor, informe seu número.' }).length(15, { message: 'Por favor, informe um número correto.' }),
-    birthDate: z.date({ required_error: 'Por favor, informe sua data de nascimento.' }),
+    phone: z
+      .string({ message: 'Por favor, informe seu número.' })
+      .length(15, { message: 'Por favor, informe um número correto.' }),
+    birthDate: z.date({
+      required_error: 'Por favor, informe sua data de nascimento.',
+    }),
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: 'As senhas não coincidem.',
@@ -41,31 +49,38 @@ export function useFormSignUp() {
 
   const [showPassword, setShowPassword] = useState(false)
 
-  const cpfMask = useMask({ mask: '___.___.___-__', replacement: { _: /\d/ } });
-  const phoneMask = useMask({ mask: '(__) 9____-____', replacement: { _: /\d/ } });
+  const cpfMask = useMask({ mask: '___.___.___-__', replacement: { _: /\d/ } })
+  const phoneMask = useMask({
+    mask: '(__) 9____-____',
+    replacement: { _: /\d/ },
+  })
 
-  const { mutate: createUser, data, isPending } = useMutation({
+  const {
+    mutate: createUser,
+    data,
+    isPending,
+  } = useMutation({
     mutationKey: ['signUp'],
     mutationFn: signUpAction,
     onSuccess: (data) => {
       if (data.success) {
-      toast.success('Cadastro efetuado com sucesso!')
-      router.push(appRoutes.signIn)
-    }
+        toast.success('Cadastro efetuado com sucesso!')
+        router.push(appRoutes.signIn)
+      }
     },
   })
-  
+
   function onSubmit(values: SignUpFormValues) {
     const formattedValues: SignUpFormValues = {
       ...values,
       phone: values.phone.replace(/\D/g, ''),
       cpf: values.cpf.replace(/\D/g, ''),
-      }
+    }
 
     createUser(formattedValues)
   }
-  
-  return { 
+
+  return {
     form,
     onSubmit,
     isPending,
@@ -73,6 +88,6 @@ export function useFormSignUp() {
     showPassword,
     setShowPassword,
     phoneMask,
-    cpfMask
-   }
+    cpfMask,
+  }
 }

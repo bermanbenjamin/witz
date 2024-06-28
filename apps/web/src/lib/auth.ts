@@ -6,7 +6,6 @@ import { getProfileService } from '@/http/user/get-profile'
 
 import { appRoutes } from './constants'
 
-
 export function isAuthenticated() {
   return !!cookies().get('token')?.value
 }
@@ -18,7 +17,7 @@ export async function ability() {
 
   const { user } = response
 
-  const ability = defineAbilityFor({id: user.id, role: user.role})
+  const ability = defineAbilityFor({ id: user.id, role: user.role })
 
   return ability
 }

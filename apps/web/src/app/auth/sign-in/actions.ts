@@ -61,35 +61,34 @@ export async function signInWithEmailAndPassword(data: FormData) {
 }
 
 export async function signInWithMagicLinkAction(data: FormData) {
-const result = magicLinkSchema.safeParse(Object.fromEntries(data))
+  const result = magicLinkSchema.safeParse(Object.fromEntries(data))
 
-if (!result.success) {
-  const errors = result.error.flatten().fieldErrors
+  if (!result.success) {
+    const errors = result.error.flatten().fieldErrors
 
-  return { success: false, message: null, errors }
-}
-
-const { email, name } = result.data
-
-try {
-  await signInWithMagicLinkService({
-    email,
-    name
-  })
-
-} catch (err) {
-  if (err instanceof HTTPError) {
-    const { message } = await err.response.json()
-
-    return { success: false, message, errors: null }
+    return { success: false, message: null, errors }
   }
 
-return {
-    success: false,
-    message: 'Algo deu errado, tente novamente em alguns instantes.',
-    errors: null,
-  }
-}
+  const { email, name } = result.data
 
-return { success: true, message: null, errors: null }
+  try {
+    await signInWithMagicLinkService({
+      email,
+      name,
+    })
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      const { message } = await err.response.json()
+
+      return { success: false, message, errors: null }
+    }
+
+    return {
+      success: false,
+      message: 'Algo deu errado, tente novamente em alguns instantes.',
+      errors: null,
+    }
+  }
+
+  return { success: true, message: null, errors: null }
 }

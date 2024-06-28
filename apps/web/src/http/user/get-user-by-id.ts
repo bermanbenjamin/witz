@@ -1,5 +1,3 @@
-
-
 import type { UserDTO } from '@/lib/model'
 
 import { api } from '../api-client'

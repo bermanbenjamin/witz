@@ -11,6 +11,6 @@ export function useFormSuitability() {
       toast.success('Email enviado com sucesso!')
     },
   )
-  
+
   return { errors, message, success, handleSubmit, isPending }
 }

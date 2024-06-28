@@ -15,9 +15,9 @@ const AppProviders = ({ children }: Props) => {
     defaultOptions: {
       queries: {
         retry: false,
-        refetchOnWindowFocus: false
-      }
-    }
+        refetchOnWindowFocus: false,
+      },
+    },
   })
 
   return (

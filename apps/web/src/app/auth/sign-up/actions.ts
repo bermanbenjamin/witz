@@ -17,9 +17,9 @@ export async function signUpAction(data: z.infer<typeof signUpSchema>) {
       email,
       password,
       cpf,
-      birthDate: format(birthDate, "dd/MM/yyyy"),
+      birthDate: format(birthDate, 'dd/MM/yyyy'),
       phone,
-      role: 'MEMBER'
+      role: 'MEMBER',
     })
   } catch (err) {
     if (err instanceof HTTPError) {
