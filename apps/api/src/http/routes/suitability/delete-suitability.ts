@@ -10,38 +10,43 @@ import { getUserPermissions } from '@/utils/get-user-permissions'
 import { MethodNotAllowedError } from '../_errors/method-not-allowed-error'
 
 export async function deleteSuitabilityById(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().register(auth).delete(
-    '/suitabilities/:suitabilityId', 
-    {
-      schema: {
-        tags: ['Suitability'],
-        summary: 'Delete a suitability by Id',
-        security: [{ bearerAuth: [] }],
-        params: z.object({
+  app
+    .withTypeProvider<ZodTypeProvider>()
+    .register(auth)
+    .delete(
+      '/suitabilities/:suitabilityId',
+      {
+        schema: {
+          tags: ['Suitability'],
+          summary: 'Delete a suitability by Id',
+          security: [{ bearerAuth: [] }],
+          params: z.object({
             suitabilityId: z.string(),
-        }),
-        response: {
-            204: noContentSchema
-        }
+          }),
+          response: {
+            204: noContentSchema,
+          },
+        },
       },
-    }, 
-    async (request, reply) => {
+      async (request, reply) => {
         const { suitabilityId } = request.params
         const { sub: userId, role } = await request.getCurrentUserProps()
 
         const { cannot } = getUserPermissions(userId, role)
 
-        if(cannot('delete', 'Suitability')){
-            throw new MethodNotAllowedError(`You're not allowed to delete this suitability.`)
+        if (cannot('delete', 'Suitability')) {
+          throw new MethodNotAllowedError(
+            `You're not allowed to delete this suitability.`,
+          )
         }
 
         await prisma.suitability.delete({
-            where: {
-                id: suitabilityId
-            }
+          where: {
+            id: suitabilityId,
+          },
         })
 
         return reply.status(204).send()
-    }
-)
+      },
+    )
 }

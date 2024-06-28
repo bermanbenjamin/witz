@@ -3,4 +3,3 @@ export class MethodNotAllowedError extends Error {
     super(message ?? 'Method not allowed')
   }
 }
-  

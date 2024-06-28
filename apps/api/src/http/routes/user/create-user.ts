@@ -22,7 +22,7 @@ export async function createUser(app: FastifyInstance) {
           cpf: z.string().optional(),
           phone: z.string().optional(),
           birthDate: z.string().optional(),
-          role: roleSchema
+          role: roleSchema,
         }),
         response: {
           201: z.void(),
@@ -30,15 +30,19 @@ export async function createUser(app: FastifyInstance) {
       },
     },
     async (request, reply) => {
-      const { name, email, password, birthDate, cpf, phone, role } = request.body
+      const { name, email, password, birthDate, cpf, phone, role } =
+        request.body
 
       const userExists = await prisma.user.findFirst({
         where: {
           OR: [{ email }, { cpf }, { phone }],
-        }})
+        },
+      })
 
       if (userExists) {
-        throw new BadRequestError('Já existe um usuário com esses dados cadastrados.')
+        throw new BadRequestError(
+          'Já existe um usuário com esses dados cadastrados.',
+        )
       }
 
       const passwordHash = await hash(password, 6)
@@ -51,7 +55,7 @@ export async function createUser(app: FastifyInstance) {
           birthDate,
           cpf,
           phone,
-          role
+          role,
         },
       })
 

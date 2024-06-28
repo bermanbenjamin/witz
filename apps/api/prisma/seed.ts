@@ -15,7 +15,7 @@ async function seed() {
   const suitability = await prisma.suitability.create({
     data: {
       score: 10,
-    }
+    },
   })
 
   const [answer1, answer2] = await prisma.$transaction([
@@ -23,28 +23,25 @@ async function seed() {
       data: {
         questionId: 1,
         suitabilityId: suitability.id,
-      }
+      },
     }),
     prisma.answer.create({
       data: {
         questionId: 2,
         suitabilityId: suitability.id,
-      }
+      },
     }),
   ])
 
   await prisma.suitability.update({
     where: {
-      id: suitability.id
+      id: suitability.id,
     },
     data: {
       answers: {
-        connect: [
-          { id: answer1.id },
-          { id: answer2.id },
-        ]
-      }
-    }
+        connect: [{ id: answer1.id }, { id: answer2.id }],
+      },
+    },
   })
 
   Promise.all([
@@ -60,9 +57,9 @@ async function seed() {
         profileType: 'MODERATE',
         suitabilities: {
           connect: {
-            id: suitability.id
-          }
-        }
+            id: suitability.id,
+          },
+        },
       },
     }),
     prisma.user.create({
@@ -77,9 +74,9 @@ async function seed() {
         profileType: 'MODERATE',
         suitabilities: {
           connect: {
-            id: suitability.id
-          }
-        }
+            id: suitability.id,
+          },
+        },
       },
     }),
     prisma.user.create({
@@ -94,9 +91,9 @@ async function seed() {
         profileType: 'MODERATE',
         suitabilities: {
           connect: {
-            id: suitability.id
-          }
-        }
+            id: suitability.id,
+          },
+        },
       },
     }),
   ])

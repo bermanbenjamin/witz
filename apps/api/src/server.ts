@@ -35,47 +35,47 @@ app.setValidatorCompiler(validatorCompiler)
 app.setErrorHandler(errorHandler)
 
 app.register(fastifySwagger, {
-    openapi: {
-      info: {
-        title: 'Witz',
-        description: 'Platform to control your investments.',
-        version: '1.0.0',
-      },
-      components: {
-        securitySchemes: {
-          bearerAuth: {
-            type: 'http',
-            scheme: 'bearer',
-            bearerFormat: 'JWT',
-          },
+  openapi: {
+    info: {
+      title: 'Witz',
+      description: 'Platform to control your investments.',
+      version: '1.0.0',
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
         },
       },
     },
-    transform: jsonSchemaTransform,
-  })
+  },
+  transform: jsonSchemaTransform,
+})
 
-  app.register(fastifyMailer, {
-    defaults: { from: 'Witz Wealth | Magic Link <delivered@resend.dev>' },
-    transport: {
-      host: 'smtp.resend.com',
-      port: 465,
-      secure: true, // use TLS
-      auth: {
-        user: 'resend',
-        pass: env.RESEND_TOKEN
-      }
-    }
-  })
-  
+app.register(fastifyMailer, {
+  defaults: { from: 'Witz Wealth | Magic Link <delivered@resend.dev>' },
+  transport: {
+    host: 'smtp.resend.com',
+    port: 465,
+    secure: true, // use TLS
+    auth: {
+      user: 'resend',
+      pass: env.RESEND_TOKEN,
+    },
+  },
+})
+
 app.register(fastifySwaggerUI, {
-    routePrefix: '/docs',
-  })
+  routePrefix: '/docs',
+})
 
 app.register(fastifyJwt, {
-    secret: env.JWT_SECRET,
-    decode: { complete: true },
-  })
-  
+  secret: env.JWT_SECRET,
+  decode: { complete: true },
+})
+
 app.register(fastifyCors, {
   origin: '*',
 })
@@ -98,10 +98,10 @@ app.register(createSuitability)
 app.register(getAllSuitabilitiesByUserId)
 app.register(deleteSuitabilityById)
 app.register(getSuitabilityById)
-  
+
 const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : undefined
 
-app.listen({ port: env.SERVER_PORT, host, }).then(() => {
+app.listen({ port: env.SERVER_PORT, host }).then(() => {
   console.log('Server is running on port 3333')
-  console.log(app.printRoutes());
+  console.log(app.printRoutes())
 })

@@ -26,7 +26,7 @@ export const errorHandler: FastifyErrorHandler = (error, _, reply) => {
       message: error.message,
     })
   }
-  
+
   if (error instanceof MethodNotAllowedError) {
     return reply.status(405).send({
       message: error.message,

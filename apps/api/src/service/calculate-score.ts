@@ -6,11 +6,11 @@ type Answer = {
 }
 
 export async function CalculateSuitabilityScore(
-  answers: Answer[]
+  answers: Answer[],
 ): Promise<number> {
   const totalWeight = answers.reduce((acc, answer) => {
     const question = questions.find(
-      (question) => question.questionNumber === answer.questionId
+      (question) => question.questionNumber === answer.questionId,
     )
 
     if (!question) {
@@ -19,12 +19,12 @@ export async function CalculateSuitabilityScore(
 
     const alternativeWeights = calculateChoosedAlternativeWeights(
       answer,
-      question
+      question,
     )
 
     const questionWeight = alternativeWeights.reduce(
       (acc, weight) => acc + weight,
-      0
+      0,
     )
     return acc + questionWeight
   }, 0)
@@ -34,16 +34,16 @@ export async function CalculateSuitabilityScore(
 
 function calculateChoosedAlternativeWeights(
   answer: Answer,
-  question: QuestionType
+  question: QuestionType,
 ) {
   return answer.choosedAlternativesId.map((choosedAlternative) => {
     const alternative = question.alternatives.find(
-      (alt) => alt.alternativeNumber === choosedAlternative
+      (alt) => alt.alternativeNumber === choosedAlternative,
     )
 
     if (!alternative) {
       throw new Error(
-        `Alternative ${choosedAlternative} for question ${answer.questionId} does not exist`
+        `Alternative ${choosedAlternative} for question ${answer.questionId} does not exist`,
       )
     }
 
