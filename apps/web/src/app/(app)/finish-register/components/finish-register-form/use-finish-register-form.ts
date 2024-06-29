@@ -7,9 +7,9 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { signUpAction } from '@/app/auth/sign-up/actions'
 import { appRoutes } from '@/lib/constants'
-
-import { signUpAction } from '../../actions'
+import type { UserDTO } from '@/lib/model'
 
 export const signUpSchema = z
   .object({
@@ -40,11 +40,21 @@ export const signUpSchema = z
 
 type SignUpFormValues = z.infer<typeof signUpSchema>
 
-export function useFormSignUp() {
+interface UseFinishRegisterFormProps {
+  currentUser: UserDTO
+}
+
+export function useFinishRegisterForm({
+  currentUser,
+}: UseFinishRegisterFormProps) {
   const router = useRouter()
 
   const form = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      email: currentUser.email,
+      name: currentUser.name,
+    },
   })
 
   const [showPassword, setShowPassword] = useState(false)
@@ -65,11 +75,11 @@ export function useFormSignUp() {
     isPending,
   } = useMutation({
     mutationKey: ['signUp'],
-    mutationFn: signUpAction,
+    mutationFn: (data: SignUpFormValues) => signUpAction(data, true),
     onSuccess: (data) => {
       if (data.success) {
         toast.success('Cadastro efetuado com sucesso!')
-        router.push(appRoutes.signIn)
+        router.push(appRoutes.signOut)
       }
     },
   })

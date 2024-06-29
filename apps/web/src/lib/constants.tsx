@@ -6,10 +6,12 @@ export const appRoutes = {
   home: '/',
   signIn: '/auth/sign-in',
   signUp: '/auth/sign-up',
+  signOut: '/api/auth/sign-out',
   magicLink: '/auth/magic-link',
   settings: '/settings',
   suitability: '/suitability',
   createSuitability: '/suitability/create',
+  finishRegister: '/finish-register',
 
   admin: {
     home: '/admin',

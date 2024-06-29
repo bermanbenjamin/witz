@@ -10,6 +10,7 @@ interface SignUpRequest {
   phone: string
   birthDate: string
   role: Role
+  isCompleteRegister: boolean
 }
 
 type SignUpResponse = void
@@ -22,8 +23,13 @@ export async function signUpService({
   cpf,
   phone,
   role,
+  isCompleteRegister,
 }: SignUpRequest): Promise<SignUpResponse> {
-  await api.post('users', {
+  const path = isCompleteRegister ? 'users?type=complete' : 'users'
+
+  console.log(path)
+
+  await api.post(path, {
     json: {
       name,
       email,
