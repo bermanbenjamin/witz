@@ -30,7 +30,7 @@ export async function auth() {
   }
 
   try {
-    const { user } = await getProfileService()
+    const user = await getProfileService()
 
     return { user }
   } catch {}

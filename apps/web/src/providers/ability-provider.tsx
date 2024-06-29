@@ -1,16 +1,13 @@
 'use client'
 
 import { createContextualCan } from '@casl/react'
-import { type AppAbility, defineAbilityFor, type Role } from '@witz/auth'
+import { type AppAbility, defineAbilityFor } from '@witz/auth'
 import { createContext, type ReactNode } from 'react'
 
+import type { UserDTO } from '@/lib/model'
+
 interface Props {
-  user: {
-    id: string
-    name: string | null
-    email: string
-    role: Role
-  }
+  user: UserDTO
   children: ReactNode
 }
 

@@ -4,15 +4,11 @@ import Link from 'next/link'
 import logoWhite from '@/assets/logo-white.svg'
 import { Icons } from '@/components/icons'
 import { ProfileButton } from '@/components/profile-button'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { auth } from '@/lib/auth'
 import { appRoutes, headerItems } from '@/lib/constants'
-import { parseProfileType } from '@/lib/utils'
 
-export async function Header() {
-  const { user } = await auth()
+import HeaderUsername from './header-username'
 
+export function Header() {
   return (
     <section className="flex w-full items-center justify-between pt-9 pb-6">
       <div className="flex items-center space-x-3 w-full">
@@ -26,12 +22,7 @@ export async function Header() {
           />
         </Link>
         <Icons.slash className="size-3 -rotate-[24deg] text-muted-foreground" />
-        <span className="text-sm">{user.name}</span>
-        {user.profileType && (
-          <Badge variant="custom" className="text-xs">
-            {parseProfileType(user.profileType)}
-          </Badge>
-        )}
+        <HeaderUsername />
       </div>
 
       <div className="flex w-full items-center gap-x-8">
@@ -42,11 +33,7 @@ export async function Header() {
             </Link>
           ))}
         </div>
-        {user.role === 'GUEST' ? (
-          <Button>
-            <Link href={appRoutes.signUp}>Finalizar cadastro</Link>
-          </Button>
-        ) : null}
+
         <ProfileButton />
       </div>
     </section>
